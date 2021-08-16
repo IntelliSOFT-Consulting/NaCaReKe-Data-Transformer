@@ -42,13 +42,8 @@ export default function DataInput(props) {
     .join(',');
 
   return (
-    <form className='form-inline'>
-      <div className='form-group'>
-        <Upload {...config} accept={SheetJSFT}>
-          <Button icon={<UploadOutlined />}>Click to Upload</Button>
-        </Upload>
-       
-      </div>
-    </form>
+    <Upload {...config} accept={SheetJSFT}>
+      <Button icon={<UploadOutlined />}>Click to Upload</Button>
+    </Upload>
   );
 }

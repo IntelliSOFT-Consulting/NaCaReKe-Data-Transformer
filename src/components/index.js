@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import XLSX from 'xlsx';
 import { Button, Modal, Form, Input } from 'antd';
+import { DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
@@ -55,7 +56,7 @@ export default function SheetJSApp(props) {
       /* Update state */
       setData(cleaned);
       setCols(make_cols(ws['!ref']));
-      // setOrgModal(true);
+      setOrgModal(true);
     };
     if (rABS) reader.readAsBinaryString(file);
     else reader.readAsArrayBuffer(file);
@@ -170,14 +171,19 @@ export default function SheetJSApp(props) {
   // console.log(data);
   useEffect(() => {
     if (data && data.length > 0 && activeSheet === 0 && !matched) {
-      setTimeout(() => setData(handleMatchNCI(data)), 10000);
-
+      setTimeout(() => setData(handleMatchNCI(data)), 1000);
       setMatched(true);
     }
     if (activeSheet > 0 && matched) {
       setMatched(false);
     }
   }, [activeSheet, data.length]);
+
+  useEffect(() => {
+    if (orgModal) {
+      orgModals();
+    }
+  }, [orgModal]);
 
   const onFinish = values => {
     const header = data[0];
@@ -196,15 +202,16 @@ export default function SheetJSApp(props) {
     return form.resetFields();
   };
 
-  return (
-    <DragDropFile handleFile={handleFile}>
-      <Modal
-        title='Edit data'
-        visible={orgModal}
-        onOk={() => formRef.current.submit()}
-        onCancel={() => setOrgModal(false)}
-        okText='Submit'
-      >
+  const orgModals = () =>
+    Modal.confirm({
+      title: 'Enter organization unit',
+      visible: { orgModal },
+      onOk: () => formRef.current.submit(),
+      onCancel() {
+        console.log('');
+      },
+      okText: 'Submit',
+      content: (
         <Form
           name='dynamic_form_nest_item'
           onFinish={onFinish}
@@ -222,36 +229,39 @@ export default function SheetJSApp(props) {
             <Input />
           </Form.Item>
         </Form>
-      </Modal>
-      <div className='row'>
-        <div className='col-xs-12'>
-          <DataInput handleFile={handleFile} />
-        </div>
-      </div>
-      <div className='row'>
-        <div className='col-xs-12'>
-          <Button
-            disabled={!data.length}
-            className='btn btn-success'
-            onClick={exportFile}
-          >
-            Export
-          </Button>
+      ),
+    });
 
-          {data && data.length > 0 && (
-            <>
-              <Button type='primary' onClick={() => setVisible(true)}>
-                Add columns
-              </Button>
-              <Params
-                visible={visible}
-                setVisible={setVisible}
-                data={data}
-                setData={setData}
-              />
-            </>
-          )}
-        </div>
+  return (
+    <DragDropFile handleFile={handleFile}>
+      <div className='doc-header'>
+        <DataInput handleFile={handleFile} />
+        {data && data.length > 0 && (
+          <>
+            <Button
+              type='link'
+              icon={<PlusSquareOutlined />}
+              onClick={() => setVisible(true)}
+            >
+              Add columns
+            </Button>
+            <Params
+              visible={visible}
+              setVisible={setVisible}
+              data={data}
+              setData={setData}
+            />
+          </>
+        )}
+        <Button
+          disabled={!data.length}
+          className='btn-export'
+          onClick={exportFile}
+          type='link'
+          icon={<DownloadOutlined />}
+        >
+          Export
+        </Button>
       </div>
       <div className='row'>
         <div className='col-xs-12'>

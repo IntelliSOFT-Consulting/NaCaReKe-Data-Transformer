@@ -1,30 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Table } from 'antd';
 
-export default function Table({ data, cols }) {
+export default function DataTable({ data, cols }) {
+  const [rowData, setRowData] = useState(null);
+  const [colData, setColData] = useState(null);
+
+  const columns = cols =>
+    cols &&
+    cols.map((item, i) => ({
+      title: item.name,
+      dataIndex: item.key,
+      key: item.key,
+    }));
+
+  const rowDatas = data =>
+    data.map((r, i) => {
+      const obj = {};
+      cols.forEach(c => {
+        obj[c.key] =
+          r[c.key] || typeof r[c.key] == 'boolean'
+            ? r[c.key].toString()
+            : r[c.key];
+        obj.key = i;
+      });
+      return obj;
+    });
+
+  useEffect(() => {
+    if (cols) {
+      setColData(columns(cols));
+    }
+    if (data.length > 0) {
+      setRowData(rowDatas(data));
+    }
+  }, [data, cols]);
+
   return (
-    <div className='table-responsive'>
-      <table className='table table-striped'>
-        <thead>
-          <tr>
-            {cols.map(c => (
-              <th key={c.key}>{c.name}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((r, i) => (
-            <tr key={i}>
-              {cols.map(c => (
-                <td key={c.key}>
-                  {r[c.key] || typeof r[c.key] == 'boolean'
-                    ? r[c.key].toString()
-                    : r[c.key]}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="full-width">
+      <Table dataSource={rowData} columns={colData} />
     </div>
   );
 }

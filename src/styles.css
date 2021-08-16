@@ -11,14 +11,37 @@ table,
 td,
 th {
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  border: 1px solid #dfdfdf;
   background-color: #e5e5e552;
   text-align: center;
+}
+
+tbody tr:first-child {
+  font-weight: 800;
 }
 
 .sheets {
   position: fixed;
   left: 0;
   bottom: 0;
+}
+
+.full-width {
+  max-width: 100vw;
+  overflow: auto;
+}
+
+.btn-export {
+  margin-left: auto;
+}
+
+.doc-header {
+  display: flex;
+  padding: 1rem;
+}
+
+.doc-header button,
+.doc-header span {
+  color: black;
+  font-weight: 600;
 }

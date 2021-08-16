@@ -1,16 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Input, Button, Space, Modal, Select } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  MinusCircleOutlined,
+  PlusOutlined,
+  FileSyncOutlined,
+} from '@ant-design/icons';
 
 const { Option } = Select;
 
 const Params = ({ visible, setVisible, data, setData }) => {
   const [cols, setCols] = useState(data[0]);
+  const [isParams, setIsParams] = useState(false);
   const [form] = Form.useForm();
 
   const formRef = useRef();
 
+  useEffect(() => {
+    const params = JSON.parse(localStorage.getItem('params'));
+    if (params && data.length > 0) {
+      setIsParams(true);
+    }
+  }, [data.length]);
+
   const onFinish = values => {
+    localStorage.setItem('params', JSON.stringify(values.params));
     values.params.forEach(param => {
       insertCol(
         param.check,
@@ -19,6 +32,21 @@ const Params = ({ visible, setVisible, data, setData }) => {
         param.yes === 'yes'
       );
     });
+    return setIsParams(true);
+  };
+
+  const autoProcess = () => {
+    const params = JSON.parse(localStorage.getItem('params'));
+    if (params) {
+      params.forEach(param => {
+        insertCol(
+          param.check,
+          param.update,
+          param.position == 'right',
+          param.yes === 'yes'
+        );
+      });
+    }
   };
 
   const insertCol = (title, col, right = false, yes = null) => {
@@ -36,7 +64,7 @@ const Params = ({ visible, setVisible, data, setData }) => {
         return row;
       }
 
-      if (yes) {
+      if (yes && !title.toLowerCase().includes('hiv')) {
         row.splice(
           right ? checked + 1 : checked,
           0,
@@ -48,13 +76,13 @@ const Params = ({ visible, setVisible, data, setData }) => {
             ? true
             : false
         );
-      } else if (title.toLowerCase().includes('hiv') && !yes) {
+      } else if (title.toLowerCase().includes('hiv')) {
         console.log(row[checked] && row[checked]);
         row.splice(
           right ? checked + 1 : checked,
           0,
 
-          row[checked + 1] && row[checked + 1].toLowerCase() === 'positive'
+          row[checked] && row[checked].toLowerCase().includes('positive')
             ? true
             : false
         );
@@ -87,6 +115,11 @@ const Params = ({ visible, setVisible, data, setData }) => {
 
   return (
     <>
+      {isParams && (
+        <Button type='link' icon={<FileSyncOutlined />} onClick={autoProcess}>
+          Auto Process
+        </Button>
+      )}
       <Modal
         title='Edit data'
         visible={visible}
