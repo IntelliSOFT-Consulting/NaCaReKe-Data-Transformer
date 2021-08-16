@@ -1,0 +1,24 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 100vw !important;
+}
+table,
+td,
+th {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #e5e5e552;
+  text-align: center;
+}
+
+.sheets {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
