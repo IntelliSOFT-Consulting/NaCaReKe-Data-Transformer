@@ -68,26 +68,26 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
           return row;
         }
 
-        if (yes && !title.toLowerCase().includes('hiv')) {
+        if (yes && !title.toString().toLowerCase().includes('hiv')) {
           row.splice(
             right ? checked + 1 : checked,
             0,
             right
-              ? row[checked] && row[checked].toLowerCase() === 'yes'
+              ? row[checked] && row[checked].toString().toLowerCase() === 'yes'
                 ? true
                 : false
-              : row[checked] && row[checked].toLowerCase() === 'yes'
+              : row[checked] && row[checked].toString().toLowerCase() === 'yes'
               ? true
               : false
           );
-        } else if (title.toLowerCase().includes('hiv')) {
+        } else if (title.toString().toLowerCase().includes('hiv')) {
           row.splice(
             right ? checked + 1 : checked,
             0,
 
             row[checked] &&
-              (row[checked].toLowerCase().includes('positive') ||
-                row[checked].toLowerCase() === 'yes')
+              (row[checked].toString().toLowerCase().includes('positive') ||
+                row[checked].toString().toLowerCase() === 'yes')
               ? true
               : false
           );
