@@ -19,6 +19,11 @@ th {
 tbody tr:first-child {
   font-weight: 800;
 }
+thead tr,
+thead th {
+  background: #e5eef4 !important;
+  text-align: center !important;
+}
 
 .sheets {
   position: fixed;
@@ -45,3 +50,17 @@ tbody tr:first-child {
   color: black;
   font-weight: 600;
 }
+
+/* .col-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.col-form > div {
+  width: 100%;
+}
+
+.col-form > div > div {
+  width: calc(100% / 2 - 1rem);
+} */

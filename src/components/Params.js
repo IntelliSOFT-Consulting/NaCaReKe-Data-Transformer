@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Input, Button, Space, Modal, Select } from 'antd';
+import { Form, Input, Button, Space, Modal, Select, message } from 'antd';
 import {
   MinusCircleOutlined,
   PlusOutlined,
@@ -8,7 +8,7 @@ import {
 
 const { Option } = Select;
 
-const Params = ({ visible, setVisible, data, setData }) => {
+const Params = ({ visible, setVisible, data, setData, positions }) => {
   const [cols, setCols] = useState(data[0]);
   const [isParams, setIsParams] = useState(false);
   const [form] = Form.useForm();
@@ -27,11 +27,13 @@ const Params = ({ visible, setVisible, data, setData }) => {
     values.params.forEach(param => {
       insertCol(
         param.check,
-        param.update,
-        param.position == 'right',
-        param.yes === 'yes'
+        param.update[0],
+        positions.rights.includes(param.update[0].trim()),
+        positions.yes.includes(param.update[0].trim())
       );
     });
+    message.success('Operations applied successfully!');
+    form.resetFields();
     return setIsParams(true);
   };
 
@@ -41,77 +43,160 @@ const Params = ({ visible, setVisible, data, setData }) => {
       params.forEach(param => {
         insertCol(
           param.check,
-          param.update,
-          param.position == 'right',
-          param.yes === 'yes'
+          param.update[0],
+          positions.rights.includes(param.update[0].trim()),
+          positions.yes.includes(param.update[0].trim())
         );
       });
+      message.success('Operations applied successfully!');
     }
   };
 
   const insertCol = (title, col, right = false, yes = null) => {
     const headers = data[0];
-    const checked = headers.indexOf(title);
+    if (!headers.includes(col)) {
+      const checked = headers.indexOf(title);
 
-    headers.splice(
-      right ? headers.indexOf(title) + 1 : headers.indexOf(title),
-      0,
-      col
-    );
+      headers.splice(
+        right ? headers.indexOf(title) + 1 : headers.indexOf(title),
+        0,
+        col
+      );
 
-    const filledCols = data.map((row, i) => {
-      if (i === 0) {
+      const filledCols = data.map((row, i) => {
+        if (i === 0) {
+          return row;
+        }
+
+        if (yes && !title.toLowerCase().includes('hiv')) {
+          row.splice(
+            right ? checked + 1 : checked,
+            0,
+            right
+              ? row[checked] && row[checked].toLowerCase() === 'yes'
+                ? true
+                : false
+              : row[checked] && row[checked].toLowerCase() === 'yes'
+              ? true
+              : false
+          );
+        } else if (title.toLowerCase().includes('hiv')) {
+          row.splice(
+            right ? checked + 1 : checked,
+            0,
+
+            row[checked] &&
+              (row[checked].toLowerCase().includes('positive') ||
+                row[checked].toLowerCase() === 'yes')
+              ? true
+              : false
+          );
+        } else if (col.includes('TELEPHONENO(+254)')) {
+          row.splice(
+            checked,
+            0,
+            row[checked] &&
+              !/UNKNOWN|Unknown|County|NONE|N\/A|Invalid code+/g.test(
+                row[checked]
+              )
+              ? `+254${row[checked].toString().replace(/[^0-9]/g, '')}`
+              : ''
+          );
+        } else if (col.includes('NOKNAME')) {
+          row.splice(
+            checked + 1,
+            0,
+            row[checked] &&
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              ? `${row[checked]
+                  .toString()
+                  .replace(/[^A-Za-z ]/g, '')
+                  .trim()}`
+              : ''
+          );
+        } else if (col.includes('NOKNUMBER')) {
+          row.splice(
+            checked + 1,
+            0,
+            row[checked] &&
+              !/UNKNOWN|Unknown|County|NONE|N\/A|Invalid code+/g.test(
+                row[checked]
+              )
+              ? `+254${row[checked].toString().replace(/[^0-9]/g, '')}`
+              : ''
+          );
+        } else if (col.includes('ADDR (County)')) {
+          row.splice(
+            checked + 1,
+            0,
+            row[checked] &&
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              ? `${row[checked]
+                  .toString()
+                  .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
+                  .trim()} County`
+              : ''
+          );
+        } else if (col.includes('ADDR (Sub-County)')) {
+          row.splice(
+            checked + 1,
+            0,
+            row[checked] &&
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              ? `${row[checked]
+                  .toString()
+                  .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
+                  .trim()} Sub-County`
+              : ''
+          );
+        } else if (col.includes('WARD')) {
+          row.splice(
+            checked + 1,
+            0,
+            row[checked] &&
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              ? `${row[checked]
+                  .toString()
+                  .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
+                  .trim()} Ward`
+              : ''
+          );
+        } else {
+          row.splice(
+            right ? checked + 1 : checked,
+            0,
+            right ? (row[checked] ? true : false) : row[checked] ? true : false
+          );
+        }
+
         return row;
-      }
+      });
 
-      if (yes && !title.toLowerCase().includes('hiv')) {
-        row.splice(
-          right ? checked + 1 : checked,
-          0,
-          right
-            ? row[checked] && row[checked].toLowerCase() === 'yes'
-              ? true
-              : false
-            : row[checked + 1] && row[checked + 1].toLowerCase() === 'yes'
-            ? true
-            : false
-        );
-      } else if (title.toLowerCase().includes('hiv')) {
-        console.log(row[checked] && row[checked]);
-        row.splice(
-          right ? checked + 1 : checked,
-          0,
+      setData(filledCols);
 
-          row[checked] && row[checked].toLowerCase().includes('positive')
-            ? true
-            : false
-        );
-      } else {
-        row.splice(
-          right ? checked + 1 : checked,
-          0,
-          right
-            ? row[checked]
-              ? true
-              : false
-            : row[checked + 1]
-            ? true
-            : false
-        );
-      }
-
-      return row;
-    });
-
-    setData(filledCols);
-    form.resetFields();
-    setVisible(false);
-    return filledCols;
+      setVisible(false);
+      return filledCols;
+    } else {
+      message.error(`Column ${col} already exists`);
+      return setVisible(false);
+    }
   };
+
+  function handleChange(value) {
+    console.log(value);
+    if (value.length > 1) {
+      value = [value[0]];
+    }
+    console.log(value);
+  }
 
   useEffect(() => {
     if (data && data.length > 1) setCols(data[0]);
   }, [data]);
+
+  const children = [
+    ...new Set([...positions.rights, ...positions.yes, ...positions.lefts]),
+  ];
 
   return (
     <>
@@ -134,6 +219,7 @@ const Params = ({ visible, setVisible, data, setData }) => {
           autoComplete='off'
           ref={formRef}
           form={form}
+          className='col-form'
         >
           <Form.List name='params'>
             {(fields, { add, remove }) => (
@@ -174,6 +260,7 @@ const Params = ({ visible, setVisible, data, setData }) => {
                           ))}
                       </Select>
                     </Form.Item>
+
                     <Form.Item
                       {...restField}
                       name={[name, 'update']}
@@ -185,48 +272,19 @@ const Params = ({ visible, setVisible, data, setData }) => {
                         },
                       ]}
                     >
-                      <Input placeholder='Column to be created' />
+                      <Select
+                        showSearch
+                        style={{ width: 250 }}
+                        mode='tags'
+                        placeholder='Column to be created'
+                        onChange={handleChange}
+                      >
+                        {children.map((item, i) => (
+                          <Option key={item}>{item}</Option>
+                        ))}
+                      </Select>
                     </Form.Item>
 
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'position']}
-                      fieldKey={[fieldKey, 'position']}
-                      rules={[
-                        {
-                          required: true,
-                          message:
-                            'Please choose position for column to be created',
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder='Select position'
-                        style={{ width: 120 }}
-                      >
-                        <Option value='left'>Left</Option>
-                        <Option value='right'>Right</Option>
-                      </Select>
-                    </Form.Item>
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'yes']}
-                      fieldKey={[fieldKey, 'yes']}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please choose value to check',
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder='Select value to check for'
-                        style={{ width: 120 }}
-                      >
-                        <Option value='yes'>Yes</Option>
-                        <Option value='any'>Any value</Option>
-                      </Select>
-                    </Form.Item>
                     <MinusCircleOutlined onClick={() => remove(name)} />
                   </Space>
                 ))}

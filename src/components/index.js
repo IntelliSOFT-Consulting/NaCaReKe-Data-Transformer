@@ -6,6 +6,7 @@ import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
+import axios from 'axios';
 
 export default function SheetJSApp(props) {
   const [data, setData] = useState([]);
@@ -17,6 +18,16 @@ export default function SheetJSApp(props) {
   const [matched, setMatched] = useState(false);
   const [orgModal, setOrgModal] = useState(false);
   const [unit, setUnit] = useState(null);
+  const [extUnit, setExtUnit] = useState(null);
+
+  const readCodeFile = async () => {
+    const { data } = await axios.get(
+      'https://res.cloudinary.com/victoriaaqua/raw/upload/v1629195873/codes_tc1v2t.json'
+    );
+    if (data) {
+      setExtUnit(data);
+    }
+  };
 
   const formRef = useRef(null);
   const [form] = Form.useForm();
@@ -92,11 +103,16 @@ export default function SheetJSApp(props) {
 
   const getNCI = () => {
     const wsname = workB.SheetNames[sheets.indexOf('NCI codes.')];
-    const ws = workB.Sheets[wsname];
+    readCodeFile();
+    if (wsname) {
+      const ws = workB.Sheets[wsname];
 
-    /* Convert array of arrays */
-    const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
-    return datas;
+      /* Convert array of arrays */
+      const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      return datas;
+    } else {
+      return extUnit;
+    }
   };
 
   const changeSheet = value => {
@@ -168,7 +184,6 @@ export default function SheetJSApp(props) {
     return final;
   };
 
-  // console.log(data);
   useEffect(() => {
     if (data && data.length > 0 && activeSheet === 0 && !matched) {
       setTimeout(() => setData(handleMatchNCI(data)), 1000);
@@ -200,6 +215,38 @@ export default function SheetJSApp(props) {
     }
     setUnit(values?.orgUnit);
     return form.resetFields();
+  };
+
+  const positions = {
+    lefts: [
+      'CHEMOTREAT (true)',
+      'IMMUNOTREAT (true)',
+      'HORMONETREATMENT (true)',
+      'RADIOTREAT (true)',
+      'SURGERY (true)',
+      'HIV(true)',
+      'SPECIFICALLYPOSITIVE (true)',
+      'OTHERTREATMENT(TRUE)',
+      'BAS (true)',
+      'TELEPHONENO(+254)',
+      'OTHERCONCURRENTILLNESS(true)',
+    ],
+    rights: [
+      'MOR(Matching NCI Codes)',
+      'TOP(Matching NCI Codes)',
+      'ADDR (Sub County)',
+      'WARD',
+      'NOKNUMBER',
+      'NOKNAME',
+      'ADDR (County)',
+    ],
+    yes: [
+      'CHEMOTREAT (true)',
+      'IMMUNOTREAT (true)',
+      'HORMONETREATMENT (true)',
+      'RADIOTREAT (true)',
+      'SURGERY (true)',
+    ],
   };
 
   const orgModals = () =>
@@ -250,6 +297,7 @@ export default function SheetJSApp(props) {
               setVisible={setVisible}
               data={data}
               setData={setData}
+              positions={positions}
             />
           </>
         )}
@@ -275,6 +323,7 @@ export default function SheetJSApp(props) {
                 type='button'
                 onClick={() => changeSheet(item)}
                 key={item}
+                disabled={item === 'NCI codes.'}
               >
                 {item}
               </Button>
