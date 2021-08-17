@@ -22,7 +22,7 @@ export default function SheetJSApp(props) {
 
   const readCodeFile = async () => {
     const { data } = await axios.get(
-      'https://res.cloudinary.com/victoriaaqua/raw/upload/v1629195873/codes_tc1v2t.json'
+      'https://res.cloudinary.com/victoriaaqua/raw/upload/v1629205570/codes_tc1v2t_ks1s7j.json'
     );
     if (data) {
       setExtUnit(data);
@@ -73,6 +73,10 @@ export default function SheetJSApp(props) {
     else reader.readAsArrayBuffer(file);
   };
 
+  useEffect(() => {
+    readCodeFile();
+  }, []);
+
   const loadData = () => {
     const wsname = workB.SheetNames[activeSheet];
     const ws = workB.Sheets[wsname];
@@ -103,12 +107,12 @@ export default function SheetJSApp(props) {
 
   const getNCI = () => {
     const wsname = workB.SheetNames[sheets.indexOf('NCI codes.')];
-    readCodeFile();
     if (wsname) {
       const ws = workB.Sheets[wsname];
 
       /* Convert array of arrays */
       const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      console.log(datas);
       return datas;
     } else {
       return extUnit;
@@ -144,49 +148,61 @@ export default function SheetJSApp(props) {
       headers.includes('MOR(Matching NCI Codes)')
     )
       return data;
-    const top = headers.indexOf('TOP');
-    const nci = getNCI().filter((item, i) => i > 1);
-    const checkMor = nci.map(item => [item[0], item[1]]);
-    const checkTop = nci.map(item => [item[2], item[3]]);
+    const cols = ['TOP', 'MOR'];
+    ['TOP(Matching NCI Codes)', 'MOR(Matching NCI Codes)'].forEach(
+      (header, i) => {
+        addMatch(cols[i], header, datas);
+      }
+    );
+  };
 
-    headers.splice(top + 1, 0, 'TOP(Matching NCI Codes)');
+  const addMatch = (title, col, datas) => {
+    const headers = datas[0];
+    const chooseNci = getNCI() || extUnit;
+    const nci = chooseNci.filter((item, i) => i > 1);
+    const checkMor = title.includes('MOR')
+      ? nci.map(item => [item[0], item[1]])
+      : nci.map(item => [item[2], item[3]]);
 
-    const mor = headers.indexOf('MOR');
-    headers.splice(mor + 1, 0, 'MOR(Matching NCI Codes)');
+    const idx = headers.indexOf(title);
+
+    headers.splice(idx + 1, 0, col);
 
     const final = datas.map((row, i) => {
       if (i === 0) {
         return row;
       }
-      const nci_match = checkMor.map(item => item[0]);
-      const nci_match_top = checkTop.map(item =>
-        item[1] ? item[1].replace(/[C.]+/g, '') : ''
-      );
-      row.splice(
-        mor,
-        0,
-        nci_match.includes(row[mor])
-          ? checkMor[nci_match.indexOf(row[mor])][1]
-          : ''
-      );
+      if (title.includes('MOR')) {
+        const nci_match = checkMor.map(item => item[0]);
+        row.splice(
+          idx + 1,
+          0,
+          nci_match.includes(row[idx + 1])
+            ? checkMor[nci_match.indexOf(row[idx + 1])][1]
+            : ''
+        );
+      } else {
+        const nci_match_top = checkMor.map(item =>
+          item[1] ? item[1].replace(/[C.]+/g, '') : ''
+        );
 
-      row.splice(
-        top + 1,
-        0,
-        row[top] && nci_match_top.includes(row[top].toString())
-          ? checkTop[nci_match_top.indexOf(row[top].toString())][1]
-          : ''
-      );
-
+        row.splice(
+          idx + 1,
+          0,
+          row[idx] && nci_match_top.includes(row[idx].toString())
+            ? checkMor[nci_match_top.indexOf(row[idx].toString())][1]
+            : ''
+        );
+      }
       return row;
     });
 
-    return final;
+    setData(final);
   };
 
   useEffect(() => {
     if (data && data.length > 0 && activeSheet === 0 && !matched) {
-      setTimeout(() => setData(handleMatchNCI(data)), 1000);
+      setTimeout(() => handleMatchNCI(data), 1000);
       setMatched(true);
     }
     if (activeSheet > 0 && matched) {
@@ -254,9 +270,6 @@ export default function SheetJSApp(props) {
       title: 'Enter organization unit',
       visible: { orgModal },
       onOk: () => formRef.current.submit(),
-      onCancel() {
-        console.log('');
-      },
       okText: 'Submit',
       content: (
         <Form
