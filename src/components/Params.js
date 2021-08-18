@@ -68,19 +68,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
           return row;
         }
 
-        if (yes && !title.toString().toLowerCase().includes('hiv')) {
-          row.splice(
-            right ? checked + 1 : checked,
-            0,
-            right
-              ? row[checked] && row[checked].toString().toLowerCase() === 'yes'
-                ? true
-                : false
-              : row[checked] && row[checked].toString().toLowerCase() === 'yes'
-              ? true
-              : false
-          );
-        } else if (title.toString().toLowerCase().includes('hiv')) {
+      else if (title.toString().toLowerCase().includes('hiv')) {
           row.splice(
             right ? checked + 1 : checked,
             0,
@@ -161,7 +149,21 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
                   .trim()} Ward`
               : ''
           );
-        } else {
+        } 
+        else if (yes && !title.toString().toLowerCase().includes('hiv')) {
+          row.splice(
+            right ? checked + 1 : checked,
+            0,
+            right
+              ? row[checked] && row[checked].toString().toLowerCase() === 'yes'
+                ? true
+                : false
+              : row[checked] && row[checked].toString().toLowerCase() === 'yes'
+              ? true
+              : false
+          );
+        } 
+        else {
           row.splice(
             right ? checked + 1 : checked,
             0,
