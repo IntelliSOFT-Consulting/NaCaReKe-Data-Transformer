@@ -118,7 +118,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
             checked + 1,
             0,
             row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(row[checked])
               ? `${row[checked]
                   .toString()
                   .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
@@ -130,7 +130,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
             checked + 1,
             0,
             row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(row[checked])
               ? `${row[checked]
                   .toString()
                   .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
@@ -142,10 +142,10 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
             checked + 1,
             0,
             row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(row[checked])
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(row[checked])
               ? `${row[checked]
                   .toString()
-                  .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
+                  .replace(/UNKNOWN|Unknown|County|Invalid code|Invalid category.|[.,]+/g, '')
                   .trim()} Ward`
               : ''
           );
