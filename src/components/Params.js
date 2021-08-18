@@ -134,7 +134,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
               ? `${row[checked]
                   .toString()
                   .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
-                  .trim()} Sub-County`
+                  .trim()} Sub County`
               : ''
           );
         } else if (col.includes('WARD')) {
