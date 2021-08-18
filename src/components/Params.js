@@ -125,7 +125,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
                   .trim()} County`
               : ''
           );
-        } else if (col.includes('ADDR (Sub-County)')) {
+        } else if (col.includes('ADDR (Sub County)')) {
           row.splice(
             checked + 1,
             0,
