@@ -7,6 +7,8 @@ import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
 import axios from 'axios';
+import didYouMean from 'didyoumean';
+import codes from '../NCIcodes';
 
 export default function SheetJSApp(props) {
   const [data, setData] = useState([]);
@@ -21,11 +23,14 @@ export default function SheetJSApp(props) {
   const [extUnit, setExtUnit] = useState(null);
 
   const readCodeFile = async () => {
+    if (codes) {
+      return setExtUnit(codes);
+    }
     const { data } = await axios.get(
       'https://res.cloudinary.com/victoriaaqua/raw/upload/v1629205570/codes_tc1v2t_ks1s7j.json'
     );
     if (data) {
-      setExtUnit(data);
+      return setExtUnit(data);
     }
   };
 
@@ -105,20 +110,6 @@ export default function SheetJSApp(props) {
     setCols(make_cols(ws['!ref']));
   };
 
-  const getNCI = () => {
-    const wsname = workB.SheetNames[sheets.indexOf('NCI codes.')];
-    if (wsname) {
-      const ws = workB.Sheets[wsname];
-
-      /* Convert array of arrays */
-      const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      console.log(datas);
-      return datas;
-    } else {
-      return extUnit;
-    }
-  };
-
   const changeSheet = value => {
     const idx = sheets.indexOf(value);
     setActiveSheet(idx);
@@ -158,8 +149,7 @@ export default function SheetJSApp(props) {
 
   const addMatch = (title, col, datas) => {
     const headers = datas[0];
-    const chooseNci = getNCI() || extUnit;
-    const nci = chooseNci.filter((item, i) => i > 1);
+    const nci = extUnit.filter((item, i) => i > 1);
     const checkMor = title.includes('MOR')
       ? nci.map(item => [item[0], item[1]])
       : nci.map(item => [item[2], item[3]]);
@@ -174,12 +164,11 @@ export default function SheetJSApp(props) {
       }
       if (title.includes('MOR')) {
         const nci_match = checkMor.map(item => item[0]);
+        const finder = didYouMean(row[idx + 1], nci_match);
         row.splice(
           idx + 1,
           0,
-          nci_match.includes(row[idx + 1])
-            ? checkMor[nci_match.indexOf(row[idx + 1])][1]
-            : ''
+          finder ? checkMor[nci_match.indexOf(row[idx + 1])][1] : ''
         );
       } else {
         const nci_match_top = checkMor.map(item =>
@@ -201,14 +190,14 @@ export default function SheetJSApp(props) {
   };
 
   useEffect(() => {
-    if (data && data.length > 0 && activeSheet === 0 && !matched) {
-      setTimeout(() => handleMatchNCI(data), 1000);
+    if (data && data.length > 0 && activeSheet === 0 && !matched && unit) {
+      setTimeout(() => handleMatchNCI(data), 2000);
       setMatched(true);
     }
     if (activeSheet > 0 && matched) {
       setMatched(false);
     }
-  }, [activeSheet, data.length]);
+  }, [activeSheet, data.length, unit]);
 
   useEffect(() => {
     if (orgModal) {

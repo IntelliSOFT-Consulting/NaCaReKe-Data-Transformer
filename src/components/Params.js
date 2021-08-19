@@ -66,9 +66,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
       const filledCols = data.map((row, i) => {
         if (i === 0) {
           return row;
-        }
-
-      else if (title.toString().toLowerCase().includes('hiv')) {
+        } else if (title.toString().toLowerCase().includes('hiv')) {
           row.splice(
             right ? checked + 1 : checked,
             0,
@@ -118,7 +116,9 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
             checked + 1,
             0,
             row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(row[checked])
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(
+                row[checked]
+              )
               ? `${row[checked]
                   .toString()
                   .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
@@ -130,7 +130,9 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
             checked + 1,
             0,
             row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(row[checked])
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(
+                row[checked]
+              )
               ? `${row[checked]
                   .toString()
                   .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
@@ -142,15 +144,19 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
             checked + 1,
             0,
             row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(row[checked])
+              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(
+                row[checked]
+              )
               ? `${row[checked]
                   .toString()
-                  .replace(/UNKNOWN|Unknown|County|Invalid code|Invalid category.|[.,]+/g, '')
+                  .replace(
+                    /UNKNOWN|Unknown|County|Invalid code|Invalid category.|[.,]+/g,
+                    ''
+                  )
                   .trim()} Ward`
               : ''
           );
-        } 
-        else if (yes && !title.toString().toLowerCase().includes('hiv')) {
+        } else if (yes && !title.toString().toLowerCase().includes('hiv')) {
           row.splice(
             right ? checked + 1 : checked,
             0,
@@ -162,8 +168,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
               ? true
               : false
           );
-        } 
-        else {
+        } else {
           row.splice(
             right ? checked + 1 : checked,
             0,
