@@ -1,14 +1,6 @@
 NaCaReKe-Data-Transformer
 =========
-
-A simple client-side app for transforming **NaCaRe dataset**.
-
-It's my try to fix a problem:
-
-  * [github/issues](https://github.com/IntelliSOFT-Consulting/NaCaReKe-Data-Transformer/issues)
-
-
-
+This project is meant to automate the process of transforming facility datasets to a format that is ready to import to NCIs NaCaRe-Ke System
 
 Table of contents
 =================
