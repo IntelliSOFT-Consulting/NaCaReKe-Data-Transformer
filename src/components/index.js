@@ -72,7 +72,9 @@ export default function SheetJSApp(props) {
       /* Update state */
       setData(cleaned);
       setCols(make_cols(ws['!ref']));
-      setOrgModal(true);
+      if (!cleaned[0].includes('OrgUnit')) {
+        setOrgModal(true);
+      }
     };
     if (rABS) reader.readAsBinaryString(file);
     else reader.readAsArrayBuffer(file);
