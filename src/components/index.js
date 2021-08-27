@@ -22,6 +22,7 @@ export default function SheetJSApp(props) {
   const [unit, setUnit] = useState(null);
   const [extUnit, setExtUnit] = useState(null);
 
+  // Return NCI codes
   const readCodeFile = async () => {
     if (codes) {
       return setExtUnit(codes);
@@ -54,6 +55,7 @@ export default function SheetJSApp(props) {
 
       /* Convert array of arrays */
       const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      // Remove unwanted characters from address
       const addr = datas[0].indexOf('ADDR (desc)');
       const cleaned = datas.map((item, i) => {
         if (i == 0) return item;
@@ -112,11 +114,13 @@ export default function SheetJSApp(props) {
     setCols(make_cols(ws['!ref']));
   };
 
+  // Switch sheet
   const changeSheet = value => {
     const idx = sheets.indexOf(value);
     setActiveSheet(idx);
     loadData();
   };
+
   const exportFile = () => {
     /* convert state to workbook */
     const ws = XLSX.utils.aoa_to_sheet(data);
@@ -134,6 +138,7 @@ export default function SheetJSApp(props) {
     return o;
   };
 
+  // add matched topology and morphology code columns and rows
   const handleMatchNCI = (datas = []) => {
     const headers = datas[0];
     if (
@@ -149,6 +154,7 @@ export default function SheetJSApp(props) {
     );
   };
 
+  // Match morphology & topology codes
   const addMatch = (title, col, datas) => {
     const headers = datas[0];
     const nci = extUnit.filter((item, i) => i > 1);
@@ -170,7 +176,7 @@ export default function SheetJSApp(props) {
         row.splice(
           idx + 1,
           0,
-          finder ? checkMor[nci_match.indexOf(row[idx + 1])][1] : ''
+          finder && checkMor[nci_match.indexOf(row[idx + 1])] ? checkMor[nci_match.indexOf(row[idx + 1])][1] : ''
         );
       } else {
         const nci_match_top = checkMor.map(item =>
@@ -191,9 +197,10 @@ export default function SheetJSApp(props) {
     setData(final);
   };
 
+
   useEffect(() => {
     if (data && data.length > 0 && activeSheet === 0 && !matched && unit) {
-      setTimeout(() => handleMatchNCI(data), 2000);
+      setTimeout(() => handleMatchNCI(data), 8000);
       setMatched(true);
     }
     if (activeSheet > 0 && matched) {
@@ -207,8 +214,10 @@ export default function SheetJSApp(props) {
     }
   }, [orgModal]);
 
+  // submit & update origanization unit
   const onFinish = values => {
     const header = data[0];
+    setUnit(values?.orgUnit);
     if (!header.includes('OrgUnit')) {
       header.splice(0, 0, 'OrgUnit');
       const newData = data.map((row, i) => {
@@ -220,10 +229,10 @@ export default function SheetJSApp(props) {
       setOrgModal(false);
       return form.resetFields();
     }
-    setUnit(values?.orgUnit);
     return form.resetFields();
   };
 
+  // column positions to be placed righ or left & check for yes responses
   const positions = {
     lefts: [
       'CHEMOTREAT (true)',
@@ -256,11 +265,15 @@ export default function SheetJSApp(props) {
     ],
   };
 
+  // Organization unit modal
   const orgModals = () =>
     Modal.confirm({
       title: 'Enter organization unit',
       visible: { orgModal },
-      onOk: () => formRef.current.submit(),
+      onOk: () => {
+        formRef.current.submit();
+        // setUnit(true);
+      },
       okText: 'Submit',
       content: (
         <Form

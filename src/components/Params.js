@@ -22,6 +22,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
     }
   }, [data.length]);
 
+  // Modal form submit
   const onFinish = values => {
     localStorage.setItem('params', JSON.stringify(values.params));
     values.params.forEach(param => {
@@ -37,6 +38,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
     return setIsParams(true);
   };
 
+  // Automatically processes the document from previous configurations
   const autoProcess = () => {
     const params = JSON.parse(localStorage.getItem('params'));
     if (params) {
@@ -52,6 +54,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
     }
   };
 
+  // Insert columns and update the data accordingly
   const insertCol = (title, col, right = false, yes = null) => {
     const headers = data[0];
     if (!headers.includes(col)) {
@@ -66,7 +69,10 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
       const filledCols = data.map((row, i) => {
         if (i === 0) {
           return row;
-        } else if (title.toString().toLowerCase().includes('hiv')) {
+        } else if (
+          title.toString().toLowerCase().includes('hiv') ||
+          title.toString().toUpperCase().includes('SPECIFICALLYPOSITIVE')
+        ) {
           row.splice(
             right ? checked + 1 : checked,
             0,
