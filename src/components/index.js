@@ -146,10 +146,10 @@ export default function SheetJSApp(props) {
       headers.includes('MOR(Matching NCI Codes)')
     )
       return data;
-    const cols = ['TOP', 'MOR'];
+    const colms = ['TOP', 'MOR'];
     ['TOP(Matching NCI Codes)', 'MOR(Matching NCI Codes)'].forEach(
       (header, i) => {
-        addMatch(cols[i], header, datas);
+        addMatch(colms[i], header, datas);
       }
     );
   };
@@ -172,11 +172,13 @@ export default function SheetJSApp(props) {
       }
       if (title.includes('MOR')) {
         const nci_match = checkMor.map(item => item[0]);
-        const finder = didYouMean(row[idx + 1], nci_match);
+        const finder = row[idx + 1] ? didYouMean(row[idx + 1].toString(), nci_match) : '';
         row.splice(
           idx + 1,
           0,
-          finder && checkMor[nci_match.indexOf(row[idx + 1])] ? checkMor[nci_match.indexOf(row[idx + 1])][1] : ''
+          finder && checkMor[nci_match.indexOf(row[idx + 1])]
+            ? checkMor[nci_match.indexOf(row[idx + 1])][1]
+            : ''
         );
       } else {
         const nci_match_top = checkMor.map(item =>
@@ -197,10 +199,9 @@ export default function SheetJSApp(props) {
     setData(final);
   };
 
-
   useEffect(() => {
     if (data && data.length > 0 && activeSheet === 0 && !matched && unit) {
-      setTimeout(() => handleMatchNCI(data), 8000);
+      setTimeout(() => handleMatchNCI(data), 4000);
       setMatched(true);
     }
     if (activeSheet > 0 && matched) {
@@ -225,9 +226,9 @@ export default function SheetJSApp(props) {
         row.splice(0, 0, values.orgUnit);
         return row;
       });
-      setData(newData);
+      form.resetFields();
       setOrgModal(false);
-      return form.resetFields();
+      return setData(newData);
     }
     return form.resetFields();
   };
@@ -272,7 +273,6 @@ export default function SheetJSApp(props) {
       visible: { orgModal },
       onOk: () => {
         formRef.current.submit();
-        // setUnit(true);
       },
       okText: 'Submit',
       content: (
