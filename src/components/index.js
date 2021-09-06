@@ -6,7 +6,6 @@ import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
-import axios from 'axios';
 import didYouMean from 'didyoumean';
 import codes from '../NCIcodes';
 
@@ -26,12 +25,6 @@ export default function SheetJSApp(props) {
   const readCodeFile = async () => {
     if (codes) {
       return setExtUnit(codes);
-    }
-    const { data } = await axios.get(
-      'https://res.cloudinary.com/victoriaaqua/raw/upload/v1629205570/codes_tc1v2t_ks1s7j.json'
-    );
-    if (data) {
-      return setExtUnit(data);
     }
   };
 
