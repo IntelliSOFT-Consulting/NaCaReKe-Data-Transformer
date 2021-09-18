@@ -1,0 +1,1694 @@
+[
+  {
+    "County Code": 1,
+    "S.County Code": 101,
+    "Sub county": "Changamwe,"
+  },
+  {
+    "County Code": 1,
+    "S.County Code": 102,
+    "Sub county": "Jomvu,"
+  },
+  {
+    "County Code": 1,
+    "S.County Code": 103,
+    "Sub county": "Kisauni,"
+  },
+  {
+    "County Code": 1,
+    "S.County Code": 104,
+    "Sub county": "Nyali,"
+  },
+  {
+    "County Code": 1,
+    "S.County Code": 105,
+    "Sub county": "Likoni,"
+  },
+  {
+    "County Code": 1,
+    "S.County Code": 106,
+    "Sub county": "Mvita."
+  },
+  {
+    "County Code": 1,
+    "S.County Code": 199,
+    "Sub county": "Mombasa County Unknown"
+  },
+  {
+    "County Code": 2,
+    "S.County Code": 201,
+    "Sub county": "Msambweni,"
+  },
+  {
+    "County Code": 2,
+    "S.County Code": 202,
+    "Sub county": "Lunga Lunga,"
+  },
+  {
+    "County Code": 2,
+    "S.County Code": 203,
+    "Sub county": "Matuga,"
+  },
+  {
+    "County Code": 2,
+    "S.County Code": 204,
+    "Sub county": "Kinango."
+  },
+  {
+    "County Code": 2,
+    "S.County Code": 299,
+    "Sub county": "Kwale County Unknown"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 301,
+    "Sub county": "Kilifi North,"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 302,
+    "Sub county": "Kilifi South,"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 303,
+    "Sub county": "Kaloleni,"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 304,
+    "Sub county": "Rabai,"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 305,
+    "Sub county": "Ganze,"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 306,
+    "Sub county": "Malindi,"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 307,
+    "Sub county": "Magarini"
+  },
+  {
+    "County Code": 3,
+    "S.County Code": 399,
+    "Sub county": "Kilifi County Unknown"
+  },
+  {
+    "County Code": 4,
+    "S.County Code": 401,
+    "Sub county": "Garsen,"
+  },
+  {
+    "County Code": 4,
+    "S.County Code": 402,
+    "Sub county": "Galole,"
+  },
+  {
+    "County Code": 4,
+    "S.County Code": 403,
+    "Sub county": "Bura."
+  },
+  {
+    "County Code": 4,
+    "S.County Code": 499,
+    "Sub county": "Tana River County"
+  },
+  {
+    "County Code": 5,
+    "S.County Code": 501,
+    "Sub county": "Lamu East,"
+  },
+  {
+    "County Code": 5,
+    "S.County Code": 502,
+    "Sub county": "Lamu West."
+  },
+  {
+    "County Code": 5,
+    "S.County Code": 599,
+    "Sub county": "Lamu County Unknown"
+  },
+  {
+    "County Code": 6,
+    "S.County Code": 601,
+    "Sub county": "Taveta,"
+  },
+  {
+    "County Code": 6,
+    "S.County Code": 602,
+    "Sub county": "Wundanyi,"
+  },
+  {
+    "County Code": 6,
+    "S.County Code": 603,
+    "Sub county": "Mwatate,"
+  },
+  {
+    "County Code": 6,
+    "S.County Code": 604,
+    "Sub county": "Voi."
+  },
+  {
+    "County Code": 6,
+    "S.County Code": 699,
+    "Sub county": "Taita-Taveta County Unknown"
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 701,
+    "Sub county": "Garissa Township"
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 702,
+    "Sub county": "Balambala,"
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 703,
+    "Sub county": "Lagdera,"
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 704,
+    "Sub county": "Dadaab,"
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 705,
+    "Sub county": "Fafi,"
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 706,
+    "Sub county": "Ijara."
+  },
+  {
+    "County Code": 7,
+    "S.County Code": 799,
+    "Sub county": "Garissa County Unknown"
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 801,
+    "Sub county": "Wajir North,"
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 802,
+    "Sub county": "Wajir East,"
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 803,
+    "Sub county": "Tarbaj,"
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 804,
+    "Sub county": "Wajir West,"
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 805,
+    "Sub county": "Eldas,"
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 806,
+    "Sub county": "Wajir South."
+  },
+  {
+    "County Code": 8,
+    "S.County Code": 899,
+    "Sub county": "Wajir County Unkown"
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 901,
+    "Sub county": "Mandera West,"
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 902,
+    "Sub county": "Banissa,"
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 903,
+    "Sub county": "Mandera North,"
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 904,
+    "Sub county": "Mandera South,"
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 905,
+    "Sub county": "Mandera East,"
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 906,
+    "Sub county": "Lafey."
+  },
+  {
+    "County Code": 9,
+    "S.County Code": 999,
+    "Sub county": "Mandera County Unknown"
+  },
+  {
+    "County Code": 10,
+    "S.County Code": 1001,
+    "Sub county": "Moyale,"
+  },
+  {
+    "County Code": 10,
+    "S.County Code": 1002,
+    "Sub county": "North Horr,"
+  },
+  {
+    "County Code": 10,
+    "S.County Code": 1003,
+    "Sub county": "Saku,"
+  },
+  {
+    "County Code": 10,
+    "S.County Code": 1004,
+    "Sub county": "Laisamis."
+  },
+  {
+    "County Code": 10,
+    "S.County Code": 1099,
+    "Sub county": "Marsabit County Unknown"
+  },
+  {
+    "County Code": 11,
+    "S.County Code": 1101,
+    "Sub county": "Isiolo North,"
+  },
+  {
+    "County Code": 11,
+    "S.County Code": 1102,
+    "Sub county": "Isiolo South."
+  },
+  {
+    "County Code": 11,
+    "S.County Code": 1199,
+    "Sub county": "Isiolo County Unknown"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1201,
+    "Sub county": "Igembe South,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1202,
+    "Sub county": "Igembe Central,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1203,
+    "Sub county": "Igembe North,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1204,
+    "Sub county": "Tigania West,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1205,
+    "Sub county": "Tigania East,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1206,
+    "Sub county": "North Imenti,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1207,
+    "Sub county": "Buuri,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1208,
+    "Sub county": "Central Imenti,"
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1209,
+    "Sub county": "South Imenti."
+  },
+  {
+    "County Code": 12,
+    "S.County Code": 1299,
+    "Sub county": "Meru County Unknown"
+  },
+  {
+    "County Code": 13,
+    "S.County Code": 1301,
+    "Sub county": "Maara,"
+  },
+  {
+    "County Code": 13,
+    "S.County Code": 1302,
+    "Sub county": "Chuka/Igambang'ombe,"
+  },
+  {
+    "County Code": 13,
+    "S.County Code": 1303,
+    "Sub county": "Tharaka."
+  },
+  {
+    "County Code": 13,
+    "S.County Code": 1399,
+    "Sub county": "Tharaka-Nithi County Unknown"
+  },
+  {
+    "County Code": 14,
+    "S.County Code": 1401,
+    "Sub county": "Manyatta,"
+  },
+  {
+    "County Code": 14,
+    "S.County Code": 1402,
+    "Sub county": "Runyenjes,"
+  },
+  {
+    "County Code": 14,
+    "S.County Code": 1403,
+    "Sub county": "Mbeere South,"
+  },
+  {
+    "County Code": 14,
+    "S.County Code": 1404,
+    "Sub county": "Mbeere North."
+  },
+  {
+    "County Code": 14,
+    "S.County Code": 1499,
+    "Sub county": "Embu County Unkown"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1501,
+    "Sub county": "Mwingi North,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1502,
+    "Sub county": "Mwingi West,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1503,
+    "Sub county": "Mwingi Central,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1504,
+    "Sub county": "Kitui West,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1505,
+    "Sub county": "Kitui Rural,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1506,
+    "Sub county": "Kitui Central,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1507,
+    "Sub county": "Kitui East,"
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1508,
+    "Sub county": "Kitui South."
+  },
+  {
+    "County Code": 15,
+    "S.County Code": 1599,
+    "Sub county": "Kitui County Unknown"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1601,
+    "Sub county": "Masinga,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1602,
+    "Sub county": "Yatta,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1603,
+    "Sub county": "Kangundo,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1604,
+    "Sub county": "Matungulu,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1605,
+    "Sub county": "Kathiani,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1606,
+    "Sub county": "Mavoko,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1607,
+    "Sub county": "Machakos Town,"
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1608,
+    "Sub county": "Mwala."
+  },
+  {
+    "County Code": 16,
+    "S.County Code": 1699,
+    "Sub county": "Machakos County Unkown"
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1701,
+    "Sub county": "Mbooni,"
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1702,
+    "Sub county": "Kilome,"
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1703,
+    "Sub county": "Kaiti,"
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1704,
+    "Sub county": "Makueni,"
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1705,
+    "Sub county": "Kibwezi West,"
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1706,
+    "Sub county": "Kibwezi East."
+  },
+  {
+    "County Code": 17,
+    "S.County Code": 1799,
+    "Sub county": "Makueni County Unknown"
+  },
+  {
+    "County Code": 18,
+    "S.County Code": 1801,
+    "Sub county": "Kinangop,"
+  },
+  {
+    "County Code": 18,
+    "S.County Code": 1802,
+    "Sub county": "Kipipiri,"
+  },
+  {
+    "County Code": 18,
+    "S.County Code": 1803,
+    "Sub county": "Ol Kalou,"
+  },
+  {
+    "County Code": 18,
+    "S.County Code": 1804,
+    "Sub county": "Ol Jorok,"
+  },
+  {
+    "County Code": 18,
+    "S.County Code": 1805,
+    "Sub county": "Ndaragwa."
+  },
+  {
+    "County Code": 18,
+    "S.County Code": 1899,
+    "Sub county": "Nyandarua County Unknown"
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1901,
+    "Sub county": "Tetu,"
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1902,
+    "Sub county": "Kieni,"
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1903,
+    "Sub county": "Mathira,"
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1904,
+    "Sub county": "Othaya,"
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1905,
+    "Sub county": "Mukurweini,"
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1906,
+    "Sub county": "Nyeri Town."
+  },
+  {
+    "County Code": 19,
+    "S.County Code": 1999,
+    "Sub county": "Nyeri County Unkown"
+  },
+  {
+    "County Code": 20,
+    "S.County Code": 2001,
+    "Sub county": "Mwea,"
+  },
+  {
+    "County Code": 20,
+    "S.County Code": 2002,
+    "Sub county": "Gichugu,"
+  },
+  {
+    "County Code": 20,
+    "S.County Code": 2003,
+    "Sub county": "Ndia,"
+  },
+  {
+    "County Code": 20,
+    "S.County Code": 2004,
+    "Sub county": "Kirinyaga Central."
+  },
+  {
+    "County Code": 20,
+    "S.County Code": 2099,
+    "Sub county": "Kirinyaga County Unknown"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2101,
+    "Sub county": "Kangema,"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2102,
+    "Sub county": "Mathioya,"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2103,
+    "Sub county": "Kiharu,"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2104,
+    "Sub county": "Kigumo,"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2105,
+    "Sub county": "Maragwa,"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2106,
+    "Sub county": "Kandara,"
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2107,
+    "Sub county": "Gatanga."
+  },
+  {
+    "County Code": 21,
+    "S.County Code": 2199,
+    "Sub county": "Murang'a County Unknown"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2201,
+    "Sub county": "Gatundu South,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2202,
+    "Sub county": "Gatundu North,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2203,
+    "Sub county": "Juja,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2204,
+    "Sub county": "Thika Town,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2205,
+    "Sub county": "Ruiru,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2206,
+    "Sub county": "Githunguri,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2207,
+    "Sub county": "Kiambu,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2208,
+    "Sub county": "Kiambaa,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2209,
+    "Sub county": "Kabete,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2210,
+    "Sub county": "Kikuyu,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2211,
+    "Sub county": "Limuru,"
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2212,
+    "Sub county": "Lari."
+  },
+  {
+    "County Code": 22,
+    "S.County Code": 2299,
+    "Sub county": "Kiambu County Unknown"
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2301,
+    "Sub county": "Turkana North,"
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2302,
+    "Sub county": "Turkana West,"
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2303,
+    "Sub county": "Turkana Central,"
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2304,
+    "Sub county": "Loima,"
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2305,
+    "Sub county": "Turkana South,"
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2306,
+    "Sub county": "Turkana East."
+  },
+  {
+    "County Code": 23,
+    "S.County Code": 2399,
+    "Sub county": "Turkana County Unknown"
+  },
+  {
+    "County Code": 24,
+    "S.County Code": 2401,
+    "Sub county": "Kapenguria,"
+  },
+  {
+    "County Code": 24,
+    "S.County Code": 2402,
+    "Sub county": "Sigor,"
+  },
+  {
+    "County Code": 24,
+    "S.County Code": 2403,
+    "Sub county": "Kacheliba,"
+  },
+  {
+    "County Code": 24,
+    "S.County Code": 2404,
+    "Sub county": "Pokot South."
+  },
+  {
+    "County Code": 24,
+    "S.County Code": 2499,
+    "Sub county": "West Pokot County Unknown"
+  },
+  {
+    "County Code": 25,
+    "S.County Code": 2501,
+    "Sub county": "Samburu West,"
+  },
+  {
+    "County Code": 25,
+    "S.County Code": 2502,
+    "Sub county": "Samburu North,"
+  },
+  {
+    "County Code": 25,
+    "S.County Code": 2503,
+    "Sub county": "Samburu East."
+  },
+  {
+    "County Code": 25,
+    "S.County Code": 2599,
+    "Sub county": "Samburu County Unknown"
+  },
+  {
+    "County Code": 26,
+    "S.County Code": 2601,
+    "Sub county": "Kwanza,"
+  },
+  {
+    "County Code": 26,
+    "S.County Code": 2602,
+    "Sub county": "Endebess,"
+  },
+  {
+    "County Code": 26,
+    "S.County Code": 2603,
+    "Sub county": "Saboti,"
+  },
+  {
+    "County Code": 26,
+    "S.County Code": 2604,
+    "Sub county": "Kiminini,"
+  },
+  {
+    "County Code": 26,
+    "S.County Code": 2605,
+    "Sub county": "Cherangany."
+  },
+  {
+    "County Code": 26,
+    "S.County Code": 2699,
+    "Sub county": "Trans-Nzoia County Unkown"
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2701,
+    "Sub county": "Soy,"
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2702,
+    "Sub county": "Turbo,"
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2703,
+    "Sub county": "Moiben,"
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2704,
+    "Sub county": "Ainabkoi,"
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2705,
+    "Sub county": "Kapseret,"
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2726,
+    "Sub county": "Kesses."
+  },
+  {
+    "County Code": 27,
+    "S.County Code": 2799,
+    "Sub county": "Uasin Gishu County"
+  },
+  {
+    "County Code": 28,
+    "S.County Code": 2801,
+    "Sub county": "Marakwet East,"
+  },
+  {
+    "County Code": 28,
+    "S.County Code": 2802,
+    "Sub county": "Marakwet West,"
+  },
+  {
+    "County Code": 28,
+    "S.County Code": 2803,
+    "Sub county": "Keiyo North,"
+  },
+  {
+    "County Code": 28,
+    "S.County Code": 2804,
+    "Sub county": "Keiyo South."
+  },
+  {
+    "County Code": 28,
+    "S.County Code": 2899,
+    "Sub county": "Elgeyo-Marakwet County Unknown"
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2901,
+    "Sub county": "Tinderet,"
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2902,
+    "Sub county": "Aldai,"
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2903,
+    "Sub county": "Nandi Hills,"
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2904,
+    "Sub county": "Chesumei,"
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2905,
+    "Sub county": "Emgwen,"
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2906,
+    "Sub county": "Mosop."
+  },
+  {
+    "County Code": 29,
+    "S.County Code": 2999,
+    "Sub county": "Nandi County Unknown"
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3001,
+    "Sub county": "Tiaty,"
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3002,
+    "Sub county": "Baringo North,"
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3003,
+    "Sub county": "Baringo Central,"
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3004,
+    "Sub county": "Baringo South,"
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3005,
+    "Sub county": "Mogotio,"
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3006,
+    "Sub county": "Eldama Ravine."
+  },
+  {
+    "County Code": 30,
+    "S.County Code": 3099,
+    "Sub county": "Baringo County Unknown"
+  },
+  {
+    "County Code": 31,
+    "S.County Code": 3101,
+    "Sub county": "Laikipia West,"
+  },
+  {
+    "County Code": 31,
+    "S.County Code": 3102,
+    "Sub county": "Laikipia East,"
+  },
+  {
+    "County Code": 31,
+    "S.County Code": 3103,
+    "Sub county": "Laikipia North."
+  },
+  {
+    "County Code": 31,
+    "S.County Code": 3199,
+    "Sub county": "Laikipia County Unknown"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3201,
+    "Sub county": "Molo,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3202,
+    "Sub county": "Njoro,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3203,
+    "Sub county": "Naivasha,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3204,
+    "Sub county": "Gilgil,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3205,
+    "Sub county": "Kuresoi South,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3206,
+    "Sub county": "Kuresoi North,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3207,
+    "Sub county": "Subukia,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3208,
+    "Sub county": "Rongai,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3209,
+    "Sub county": "Bahati,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3210,
+    "Sub county": "Nakuru Town West,"
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3211,
+    "Sub county": "Nakuru Town East."
+  },
+  {
+    "County Code": 32,
+    "S.County Code": 3299,
+    "Sub county": "Nakuru County Unknown"
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3301,
+    "Sub county": "Kilgoris,"
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3302,
+    "Sub county": "Emurua Dikirr,"
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3303,
+    "Sub county": "Narok North,"
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3304,
+    "Sub county": "Narok East,"
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3305,
+    "Sub county": "Narok South,"
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3306,
+    "Sub county": "Narok West."
+  },
+  {
+    "County Code": 33,
+    "S.County Code": 3399,
+    "Sub county": "Narok County Unknown"
+  },
+  {
+    "County Code": 34,
+    "S.County Code": 3401,
+    "Sub county": "Kajiado North,"
+  },
+  {
+    "County Code": 34,
+    "S.County Code": 3402,
+    "Sub county": "Kajiado Central,"
+  },
+  {
+    "County Code": 34,
+    "S.County Code": 3403,
+    "Sub county": "Kajiado East,"
+  },
+  {
+    "County Code": 34,
+    "S.County Code": 3404,
+    "Sub county": "Kajiado West,"
+  },
+  {
+    "County Code": 34,
+    "S.County Code": 3405,
+    "Sub county": "Kajiado South."
+  },
+  {
+    "County Code": 34,
+    "S.County Code": 3499,
+    "Sub county": "Kajiado County Unkonwn"
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3501,
+    "Sub county": "Kipkelion East,"
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3502,
+    "Sub county": "Kipkelion West,"
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3503,
+    "Sub county": "Ainamoi,"
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3504,
+    "Sub county": "Bureti,"
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3505,
+    "Sub county": "Belgut,"
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3506,
+    "Sub county": "Sigowet–Soin."
+  },
+  {
+    "County Code": 35,
+    "S.County Code": 3599,
+    "Sub county": "Kericho County Unknown"
+  },
+  {
+    "County Code": 36,
+    "S.County Code": 3601,
+    "Sub county": "Sotik,"
+  },
+  {
+    "County Code": 36,
+    "S.County Code": 3602,
+    "Sub county": "Chepalungu,"
+  },
+  {
+    "County Code": 36,
+    "S.County Code": 3603,
+    "Sub county": "Bomet East,"
+  },
+  {
+    "County Code": 36,
+    "S.County Code": 3604,
+    "Sub county": "Bomet Central,"
+  },
+  {
+    "County Code": 36,
+    "S.County Code": 3605,
+    "Sub county": "Konoin."
+  },
+  {
+    "County Code": 36,
+    "S.County Code": 3699,
+    "Sub county": "Bomet County Unknown"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3701,
+    "Sub county": "Lugari,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3702,
+    "Sub county": "Likuyani,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3703,
+    "Sub county": "Malava,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3704,
+    "Sub county": "Lurambi,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3705,
+    "Sub county": "Navakholo,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3706,
+    "Sub county": "Mumias West,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3707,
+    "Sub county": "Mumias East,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3708,
+    "Sub county": "Matungu,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3709,
+    "Sub county": "Butere,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3710,
+    "Sub county": "Khwisero,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3711,
+    "Sub county": "Shinyalu,"
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3712,
+    "Sub county": "Ikolomani."
+  },
+  {
+    "County Code": 37,
+    "S.County Code": 3799,
+    "Sub county": "Kakamega County Unknown"
+  },
+  {
+    "County Code": 38,
+    "S.County Code": 3801,
+    "Sub county": "Vihiga,"
+  },
+  {
+    "County Code": 38,
+    "S.County Code": 3802,
+    "Sub county": "Sabatia,"
+  },
+  {
+    "County Code": 38,
+    "S.County Code": 3803,
+    "Sub county": "Hamisi,"
+  },
+  {
+    "County Code": 38,
+    "S.County Code": 3804,
+    "Sub county": "Luanda,"
+  },
+  {
+    "County Code": 38,
+    "S.County Code": 3805,
+    "Sub county": "Emuhaya."
+  },
+  {
+    "County Code": 38,
+    "S.County Code": 3899,
+    "Sub county": "Vihiga County Unknown"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3901,
+    "Sub county": "Mount Elgon,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3902,
+    "Sub county": "Sirisia,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3903,
+    "Sub county": "Kabuchai,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3904,
+    "Sub county": "Bumula,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3905,
+    "Sub county": "Kanduyi,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3906,
+    "Sub county": "Webuye East,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3907,
+    "Sub county": "Webuye West,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3908,
+    "Sub county": "Kimilili,"
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3910,
+    "Sub county": "Tongaren."
+  },
+  {
+    "County Code": 39,
+    "S.County Code": 3999,
+    "Sub county": "Bungoma County Unknown"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4001,
+    "Sub county": "Teso North,"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4002,
+    "Sub county": "Teso South,"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4003,
+    "Sub county": "Nambale,"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4004,
+    "Sub county": "Matayos,"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4005,
+    "Sub county": "Butula,"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4006,
+    "Sub county": "Funyula,"
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4007,
+    "Sub county": "Budalangi."
+  },
+  {
+    "County Code": 40,
+    "S.County Code": 4099,
+    "Sub county": "Busia County Unknown"
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4101,
+    "Sub county": "Ugenya,"
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4102,
+    "Sub county": "Ugunja,"
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4103,
+    "Sub county": "Alego Usonga,"
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4104,
+    "Sub county": "Gem,"
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4105,
+    "Sub county": "Bondo,"
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4106,
+    "Sub county": "Rarieda."
+  },
+  {
+    "County Code": 41,
+    "S.County Code": 4199,
+    "Sub county": "Siaya County Unknown"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4201,
+    "Sub county": "Kisumu East,"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4202,
+    "Sub county": "Kisumu West,"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4203,
+    "Sub county": "Kisumu Central,"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4204,
+    "Sub county": "Seme,"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4205,
+    "Sub county": "Nyando,"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4206,
+    "Sub county": "Muhoroni,"
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4207,
+    "Sub county": "Nyakach."
+  },
+  {
+    "County Code": 42,
+    "S.County Code": 4299,
+    "Sub county": "Kisumu County Unknown"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4301,
+    "Sub county": "Kasipul,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4302,
+    "Sub county": "Kabondo Kasipul,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4303,
+    "Sub county": "Karachuonyo,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4304,
+    "Sub county": "Rangwe,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4305,
+    "Sub county": "Homa Bay Town,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4306,
+    "Sub county": "Ndhiwa,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4307,
+    "Sub county": "Mbita,"
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4308,
+    "Sub county": "Suba."
+  },
+  {
+    "County Code": 43,
+    "S.County Code": 4399,
+    "Sub county": "Homa Bay County Unknown"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4401,
+    "Sub county": "Rongo,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4402,
+    "Sub county": "Awendo,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4403,
+    "Sub county": "Suna East,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4404,
+    "Sub county": "Suna West,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4405,
+    "Sub county": "Uriri,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4406,
+    "Sub county": "Nyatike,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4407,
+    "Sub county": "Kuria West,"
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4408,
+    "Sub county": "Kuria East."
+  },
+  {
+    "County Code": 44,
+    "S.County Code": 4499,
+    "Sub county": "Migori County Unknown"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4501,
+    "Sub county": "Bonchari,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4502,
+    "Sub county": "South Mugirango,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4503,
+    "Sub county": "Bomachoge Borabu,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4504,
+    "Sub county": "Bobasi,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4505,
+    "Sub county": "Bomachoge Chache,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4506,
+    "Sub county": "Nyaribari Masaba,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4507,
+    "Sub county": "Nyaribari Chache,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4508,
+    "Sub county": "Kitutu Chache North,"
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4509,
+    "Sub county": "Kitutu Chache South."
+  },
+  {
+    "County Code": 45,
+    "S.County Code": 4599,
+    "Sub county": "Kisii County Unknown"
+  },
+  {
+    "County Code": 46,
+    "S.County Code": 4601,
+    "Sub county": "Kitutu Masaba,"
+  },
+  {
+    "County Code": 46,
+    "S.County Code": 4602,
+    "Sub county": "West Mugirango,"
+  },
+  {
+    "County Code": 46,
+    "S.County Code": 4603,
+    "Sub county": "North Mugirango,"
+  },
+  {
+    "County Code": 46,
+    "S.County Code": 4604,
+    "Sub county": "Borabu."
+  },
+  {
+    "County Code": 46,
+    "S.County Code": 4699,
+    "Sub county": "Nyamira County Unknown"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4701,
+    "Sub county": "Westlands"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4702,
+    "Sub county": "Dagoretti North"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4703,
+    "Sub county": "Dagoretti South"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4704,
+    "Sub county": "Lang'ata Karen"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4705,
+    "Sub county": "Kibra"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4706,
+    "Sub county": "Roysambu"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4707,
+    "Sub county": "Kasarani"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4708,
+    "Sub county": "Ruaraka"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4709,
+    "Sub county": "Embakasi South"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4710,
+    "Sub county": "Embakasi North"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4711,
+    "Sub county": "Embakasi Central"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4712,
+    "Sub county": "Embakasi East"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4713,
+    "Sub county": "Embakasi West"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4714,
+    "Sub county": "Makadara"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4715,
+    "Sub county": "Kamukunji"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4716,
+    "Sub county": "Starehe"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4717,
+    "Sub county": "Mathare"
+  },
+  {
+    "County Code": 47,
+    "S.County Code": 4799,
+    "Sub county": "Nairobi County Unknown"
+  },
+  {
+    "County Code": 99,
+    "S.County Code": 9999,
+    "Sub county": "UNKNOWN"
+  }
+]
+
+

@@ -6,7 +6,6 @@ import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
-import didYouMean from 'didyoumean';
 import codes from '../NCIcodes';
 
 export default function SheetJSApp(props) {
@@ -16,20 +15,43 @@ export default function SheetJSApp(props) {
   const [activeSheet, setActiveSheet] = useState(0);
   const [workB, setWorkB] = useState(null);
   const [visible, setVisible] = useState(false);
-  const [matched, setMatched] = useState(false);
   const [orgModal, setOrgModal] = useState(false);
   const [unit, setUnit] = useState(null);
-  const [extUnit, setExtUnit] = useState(null);
-
-  // Return NCI codes
-  const readCodeFile = async () => {
-    if (codes) {
-      return setExtUnit(codes);
-    }
-  };
 
   const formRef = useRef(null);
   const [form] = Form.useForm();
+
+  String.prototype.capitalize = function () {
+    return this.toLowerCase().replace(/\b[a-z]/g, char => char.toUpperCase());
+  };
+
+  const cleanAddr = (datas, field) => {
+    const addr = datas[0].indexOf(field);
+    console.log(field, addr);
+    if (addr >= 0) {
+      const cleaned = datas.map((item, i) => {
+        if (i == 0) return item;
+
+        item.splice(
+          addr,
+          1,
+          item[addr]
+            ? item[addr]
+                .capitalize()
+                .trim()
+                .replace(
+                  /UNKNOWN|Unknown|County|Sub County|Invalid code|[.,]+/g,
+                  ''
+                )
+            : ''
+        );
+        return item;
+      });
+      setData(cleaned);
+      return cleaned;
+    }
+    return datas;
+  };
 
   const handleFile = async (file /*:File*/) => {
     /* Boilerplate to set up FileReader */
@@ -49,24 +71,12 @@ export default function SheetJSApp(props) {
       /* Convert array of arrays */
       const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
       // Remove unwanted characters from address
-      const addr = datas[0].indexOf('ADDR (desc)');
-      const cleaned = datas.map((item, i) => {
-        if (i == 0) return item;
-        item.splice(
-          addr,
-          1,
-          item[addr]
-            ? item[addr]
-                .trim()
-                .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
-            : ''
-        );
-        return item;
+      let cleaned = datas;
+      await ['ADDR (desc)', 'ADDR (cat)'].forEach(field => {
+        cleaned = cleanAddr(datas, field);
       });
 
-      /* Update state */
-      setData(cleaned);
-      setCols(make_cols(ws['!ref']));
+      await setCols(make_cols(ws['!ref']));
       if (!cleaned[0].includes('OrgUnit')) {
         setOrgModal(true);
       }
@@ -75,35 +85,17 @@ export default function SheetJSApp(props) {
     else reader.readAsArrayBuffer(file);
   };
 
-  useEffect(() => {
-    readCodeFile();
-  }, []);
-
-  const loadData = () => {
+  const loadData = async () => {
     const wsname = workB.SheetNames[activeSheet];
     const ws = workB.Sheets[wsname];
 
     /* Convert array of arrays */
     const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
-    const addr = datas[0].indexOf('ADDR (desc)');
-    if (addr >= 0) {
-      const cleaned = datas.map((item, i) => {
-        if (i == 0) return item;
-        item.splice(
-          addr,
-          1,
-          item[addr]
-            .trim()
-            .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
-        );
-        return item;
-      });
+    let cleaned = datas;
+    await [('ADDR (desc)', 'ADDR (cat)')].forEach(field => {
+      cleaned = cleanAddr(datas, field);
+    });
 
-      /* Update state */
-      setData(cleaned);
-    } else {
-      setData(datas);
-    }
     setCols(make_cols(ws['!ref']));
   };
 
@@ -130,77 +122,6 @@ export default function SheetJSApp(props) {
       o[i] = { name: XLSX.utils.encode_col(i), key: i };
     return o;
   };
-
-  // add matched topology and morphology code columns and rows
-  const handleMatchNCI = (datas = []) => {
-    const headers = datas[0];
-    if (
-      headers.includes('TOP(Matching NCI Codes)') ||
-      headers.includes('MOR(Matching NCI Codes)')
-    )
-      return data;
-    const colms = ['TOP', 'MOR'];
-    ['TOP(Matching NCI Codes)', 'MOR(Matching NCI Codes)'].forEach(
-      (header, i) => {
-        addMatch(colms[i], header, datas);
-      }
-    );
-  };
-
-  // Match morphology & topology codes
-  const addMatch = (title, col, datas) => {
-    const headers = datas[0];
-    const nci = extUnit.filter((item, i) => i > 1);
-    const checkMor = title.includes('MOR')
-      ? nci.map(item => [item[0], item[1]])
-      : nci.map(item => [item[2], item[3]]);
-
-    const idx = headers.indexOf(title);
-
-    headers.splice(idx + 1, 0, col);
-
-    const final = datas.map((row, i) => {
-      if (i === 0) {
-        return row;
-      }
-      if (title.includes('MOR')) {
-        const nci_match = checkMor.map(item => item[0]);
-        const finder = row[idx + 1] ? didYouMean(row[idx + 1].toString(), nci_match) : '';
-        row.splice(
-          idx + 1,
-          0,
-          finder && checkMor[nci_match.indexOf(row[idx + 1])]
-            ? checkMor[nci_match.indexOf(row[idx + 1])][1]
-            : ''
-        );
-      } else {
-        const nci_match_top = checkMor.map(item =>
-          item[1] ? item[1].replace(/[C.]+/g, '') : ''
-        );
-
-        row.splice(
-          idx + 1,
-          0,
-          row[idx] && nci_match_top.includes(row[idx].toString())
-            ? checkMor[nci_match_top.indexOf(row[idx].toString())][1]
-            : ''
-        );
-      }
-      return row;
-    });
-
-    setData(final);
-  };
-
-  useEffect(() => {
-    if (data && data.length > 0 && activeSheet === 0 && !matched && unit) {
-      setTimeout(() => handleMatchNCI(data), 4000);
-      setMatched(true);
-    }
-    if (activeSheet > 0 && matched) {
-      setMatched(false);
-    }
-  }, [activeSheet, data.length, unit]);
 
   useEffect(() => {
     if (orgModal) {
@@ -308,6 +229,7 @@ export default function SheetJSApp(props) {
               data={data}
               setData={setData}
               positions={positions}
+              codes={codes}
             />
           </>
         )}

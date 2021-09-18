@@ -1,19 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Input, Button, Space, Modal, Select, message } from 'antd';
+import { Form, Button, Space, Modal, Select, message } from 'antd';
 import {
   MinusCircleOutlined,
   PlusOutlined,
   FileSyncOutlined,
 } from '@ant-design/icons';
+import didYouMean from 'didyoumean';
 
 const { Option } = Select;
 
-const Params = ({ visible, setVisible, data, setData, positions }) => {
+const Params = ({ visible, setVisible, data, setData, positions, codes }) => {
   const [cols, setCols] = useState(data[0]);
   const [isParams, setIsParams] = useState(false);
   const [form] = Form.useForm();
 
   const formRef = useRef();
+
+  const isInvalid = input =>
+    input &&
+    !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(input);
+
+  const replaceAddr = (addr, txt = '') => {
+    return `${addr
+      .toString()
+      .replace(/UNKNOWN|Unknown|County| Sub County|Invalid code|[.,]+/g, '')
+      .trim()} ${txt}`;
+  };
 
   useEffect(() => {
     const params = JSON.parse(localStorage.getItem('params'));
@@ -23,9 +35,10 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
   }, [data.length]);
 
   // Modal form submit
-  const onFinish = values => {
-    localStorage.setItem('params', JSON.stringify(values.params));
-    values.params.forEach(param => {
+  const onFinish = async values => {
+    await localStorage.setItem('params', JSON.stringify(values.params));
+    await handleMatchNCI(data);
+    await values.params.forEach(param => {
       insertCol(
         param.check,
         param.update[0],
@@ -33,16 +46,18 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
         positions.yes.includes(param.update[0].trim())
       );
     });
-    message.success('Operations applied successfully!');
-    form.resetFields();
+
+    await message.success('Operations applied successfully!');
+    await form.resetFields();
     return setIsParams(true);
   };
 
   // Automatically processes the document from previous configurations
-  const autoProcess = () => {
+  const autoProcess = async () => {
     const params = JSON.parse(localStorage.getItem('params'));
+    await handleMatchNCI(data);
     if (params) {
-      params.forEach(param => {
+      await params.forEach(param => {
         insertCol(
           param.check,
           param.update[0],
@@ -50,7 +65,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
           positions.yes.includes(param.update[0].trim())
         );
       });
-      message.success('Operations applied successfully!');
+      await message.success('Operations applied successfully!');
     }
   };
 
@@ -110,10 +125,7 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
           row.splice(
             checked + 1,
             0,
-            row[checked] &&
-              !/UNKNOWN|Unknown|County|NONE|N\/A|Invalid code+/g.test(
-                row[checked]
-              )
+            isInvalid(row[checked])
               ? `+254${row[checked].toString().replace(/[^0-9]/g, '')}`
               : ''
           );
@@ -121,46 +133,21 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
           row.splice(
             checked + 1,
             0,
-            row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(
-                row[checked]
-              )
-              ? `${row[checked]
-                  .toString()
-                  .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
-                  .trim()} County`
-              : ''
+            isInvalid(row[checked]) ? replaceAddr(row[checked], 'County') : ''
           );
         } else if (col.includes('ADDR (Sub County)')) {
           row.splice(
             checked + 1,
             0,
-            row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(
-                row[checked]
-              )
-              ? `${row[checked]
-                  .toString()
-                  .replace(/UNKNOWN|Unknown|County|Invalid code|[.,]+/g, '')
-                  .trim()} Sub County`
+            isInvalid(row[checked])
+              ? replaceAddr(row[checked], 'Sub County')
               : ''
           );
         } else if (col.includes('WARD')) {
           row.splice(
             checked + 1,
             0,
-            row[checked] &&
-              !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(
-                row[checked]
-              )
-              ? `${row[checked]
-                  .toString()
-                  .replace(
-                    /UNKNOWN|Unknown|County|Invalid code|Invalid category.|[.,]+/g,
-                    ''
-                  )
-                  .trim()} Ward`
-              : ''
+            isInvalid(row[checked]) ? replaceAddr(row[checked], 'Ward') : ''
           );
         } else if (yes && !title.toString().toLowerCase().includes('hiv')) {
           row.splice(
@@ -195,12 +182,71 @@ const Params = ({ visible, setVisible, data, setData, positions }) => {
     }
   };
 
+  const handleMatchNCI = (datas = []) => {
+    const headers = datas[0];
+    if (
+      headers.includes('TOP(Matching NCI Codes)') ||
+      headers.includes('MOR(Matching NCI Codes)')
+    )
+      return;
+    const colms = ['TOP', 'MOR'];
+    ['TOP(Matching NCI Codes)', 'MOR(Matching NCI Codes)'].forEach(
+      (header, i) => {
+        addMatch(colms[i], header, datas);
+      }
+    );
+  };
+
+  // Match morphology & topology codes
+  const addMatch = (title, col, datas) => {
+    const headers = datas[0];
+    const nci = codes.filter((item, i) => i > 1);
+    const checkMor = title.includes('MOR')
+      ? nci.map(item => [item[0], item[1]])
+      : nci.map(item => [item[2], item[3]]);
+
+    const idx = headers.indexOf(title);
+
+    headers.splice(idx + 1, 0, col);
+
+    const final = datas.map((row, i) => {
+      if (i === 0) {
+        return row;
+      }
+      if (title.includes('MOR')) {
+        const nci_match = checkMor.map(item => item[0]);
+        const finder = row[idx + 1]
+          ? didYouMean(row[idx + 1].toString(), nci_match)
+          : '';
+        row.splice(
+          idx + 1,
+          0,
+          finder && checkMor[nci_match.indexOf(row[idx + 1])]
+            ? checkMor[nci_match.indexOf(row[idx + 1])][1]
+            : ''
+        );
+      } else {
+        const nci_match_top = checkMor.map(item =>
+          item[1] ? item[1].replace(/[C.]+/g, '') : ''
+        );
+
+        row.splice(
+          idx + 1,
+          0,
+          row[idx] && nci_match_top.includes(row[idx].toString())
+            ? checkMor[nci_match_top.indexOf(row[idx].toString())][1]
+            : ''
+        );
+      }
+      return row;
+    });
+    setData(final);
+  };
+
   function handleChange(value) {
-    console.log(value);
     if (value.length > 1) {
       value = [value[0]];
     }
-    console.log(value);
   }
 
   useEffect(() => {
