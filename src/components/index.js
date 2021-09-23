@@ -27,7 +27,6 @@ export default function SheetJSApp(props) {
 
   const cleanAddr = (datas, field) => {
     const addr = datas[0].indexOf(field);
-    console.log(field, addr);
     if (addr >= 0) {
       const cleaned = datas.map((item, i) => {
         if (i == 0) return item;

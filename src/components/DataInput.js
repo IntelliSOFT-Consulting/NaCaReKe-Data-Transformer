@@ -37,13 +37,14 @@ export default function DataInput(props) {
     'wq*',
     'html',
     'htm',
+    'json'
   ]
     .map(x => '.' + x)
     .join(',');
 
   return (
-    <Upload {...config} accept={SheetJSFT}>
-      <Button icon={<UploadOutlined />}>Click to Upload</Button>
+    <Upload data-testid='file-upload' {...config} accept={SheetJSFT}>
+      <Button data-testid='upload-btn' icon={<UploadOutlined />}>Click to Upload</Button>
     </Upload>
   );
 }

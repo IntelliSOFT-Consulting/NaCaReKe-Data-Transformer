@@ -36,7 +36,7 @@ export default function DataTable({ data, cols }) {
   }, [data, cols]);
 
   return (
-    <div className="full-width">
+    <div data-testid='table' className='full-width'>
       <Table dataSource={rowData} columns={colData} />
     </div>
   );

@@ -1,20 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Form, Button, Space, Modal, Select, message } from 'antd';
-import {
-  MinusCircleOutlined,
-  PlusOutlined,
-  FileSyncOutlined,
-} from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import { message, Form, Button } from 'antd';
+import { FileSyncOutlined } from '@ant-design/icons';
 import didYouMean from 'didyoumean';
-
-const { Option } = Select;
+import ColumnModal from './ColModal';
 
 const Params = ({ visible, setVisible, data, setData, positions, codes }) => {
   const [cols, setCols] = useState(data[0]);
   const [isParams, setIsParams] = useState(false);
   const [form] = Form.useForm();
-
-  const formRef = useRef();
 
   const isInvalid = input =>
     input &&
@@ -253,7 +246,7 @@ const Params = ({ visible, setVisible, data, setData, positions, codes }) => {
     if (data && data.length > 1) setCols(data[0]);
   }, [data]);
 
-  const children = [
+  const opts = [
     ...new Set([...positions.rights, ...positions.yes, ...positions.lefts]),
   ];
 
@@ -264,104 +257,14 @@ const Params = ({ visible, setVisible, data, setData, positions, codes }) => {
           Auto Process
         </Button>
       )}
-      <Modal
-        title='Edit data'
+      <ColumnModal
+        opts={opts}
+        handleChange={handleChange}
         visible={visible}
-        onOk={() => formRef.current.submit()}
-        onCancel={() => setVisible(false)}
-        width={1000}
-        okText='Submit'
-      >
-        <Form
-          name='dynamic_form_nest_item'
-          onFinish={onFinish}
-          autoComplete='off'
-          ref={formRef}
-          form={form}
-          className='col-form'
-        >
-          <Form.List name='params'>
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(({ key, name, fieldKey, ...restField }) => (
-                  <Space
-                    key={key}
-                    style={{ display: 'flex', marginBottom: 8 }}
-                    align='baseline'
-                  >
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'check']}
-                      fieldKey={[fieldKey, 'check']}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Missing column to be checked',
-                        },
-                      ]}
-                    >
-                      <Select
-                        showSearch
-                        style={{ width: 200 }}
-                        placeholder='Select column to check'
-                        optionFilterProp='children'
-                        filterOption={(input, option) =>
-                          option.children
-                            .toLowerCase()
-                            .indexOf(input.toLowerCase()) >= 0
-                        }
-                      >
-                        {cols &&
-                          cols.map((col, i) => (
-                            <Option value={col} key={i}>
-                              {col}
-                            </Option>
-                          ))}
-                      </Select>
-                    </Form.Item>
-
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'update']}
-                      fieldKey={[fieldKey, 'update']}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Missing column to be created',
-                        },
-                      ]}
-                    >
-                      <Select
-                        showSearch
-                        style={{ width: 250 }}
-                        mode='tags'
-                        placeholder='Column to be created'
-                        onChange={handleChange}
-                      >
-                        {children.map((item, i) => (
-                          <Option key={item}>{item}</Option>
-                        ))}
-                      </Select>
-                    </Form.Item>
-
-                    <MinusCircleOutlined onClick={() => remove(name)} />
-                  </Space>
-                ))}
-                <Form.Item>
-                  <Button
-                    type='dashed'
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
-                    Add column
-                  </Button>
-                </Form.Item>
-              </>
-            )}
-          </Form.List>
-        </Form>
-      </Modal>
+        setVisible={setVisible}
+        cols={cols}
+        onFinish={onFinish}
+      />
     </>
   );
 };
