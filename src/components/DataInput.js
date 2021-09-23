@@ -1,15 +1,17 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 export default function DataInput(props) {
   const config = {
-    onChange: info => {
-      if (info.fileList && info.fileList.length == 1) {
+    onChange: (info) => {
+      if (info.fileList && info.fileList.length === 1) {
         props.handleFile(info.fileList[0]?.originFileObj);
       } else if (info.fileList && info.fileList.length > 1) {
         props.handleFile(
-          info.fileList[info.fileList.length - 1]?.originFileObj
+          info.fileList[info.fileList.length - 1]?.originFileObj,
         );
       }
     },
@@ -37,14 +39,18 @@ export default function DataInput(props) {
     'wq*',
     'html',
     'htm',
-    'json'
+    'json',
   ]
-    .map(x => '.' + x)
+    .map((x) => `.${x}`)
     .join(',');
 
   return (
-    <Upload data-testid='file-upload' {...config} accept={SheetJSFT}>
-      <Button data-testid='upload-btn' icon={<UploadOutlined />}>Click to Upload</Button>
+    <Upload data-testid="file-upload" {...config} accept={SheetJSFT}>
+      <Button data-testid="upload-btn" icon={<UploadOutlined />}>Click to Upload</Button>
     </Upload>
   );
 }
+
+DataInput.propTypes = {
+  handleFile: PropTypes.func.isRequired,
+};

@@ -1,5 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { Form, Button, Space, Select } from 'antd';
+import PropTypes from 'prop-types';
+import {
+  Form, Button, Space, Select,
+} from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -10,25 +14,27 @@ export default function ColumnForm({
   handleChange,
   formRef,
   form,
-  opts
+  opts,
 }) {
   return (
     <Form
-      name='dynamic_form_nest_item'
+      name="dynamic_form_nest_item"
       onFinish={onFinish}
-      autoComplete='off'
+      autoComplete="off"
       ref={formRef}
       form={form}
-      className='col-form'
+      className="col-form"
     >
-      <Form.List name='params'>
+      <Form.List name="params">
         {(fields, { add, remove }) => (
           <>
-            {fields.map(({ key, name, fieldKey, ...restField }) => (
+            {fields.map(({
+              key, name, fieldKey, ...restField
+            }) => (
               <Space
                 key={key}
                 style={{ display: 'flex', marginBottom: 8 }}
-                align='baseline'
+                align="baseline"
               >
                 <Form.Item
                   {...restField}
@@ -44,16 +50,14 @@ export default function ColumnForm({
                   <Select
                     showSearch
                     style={{ width: 200 }}
-                    placeholder='Select column to check'
-                    optionFilterProp='children'
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
+                    placeholder="Select column to check"
+                    optionFilterProp="children"
+                    filterOption={(input, option) => option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0}
                   >
-                    {cols &&
-                      cols.map((col, i) => (
+                    {cols
+                      && cols.map((col, i) => (
                         <Option value={col} key={i}>
                           {col}
                         </Option>
@@ -75,11 +79,11 @@ export default function ColumnForm({
                   <Select
                     showSearch
                     style={{ width: 250 }}
-                    mode='tags'
-                    placeholder='Column to be created'
+                    mode="tags"
+                    placeholder="Column to be created"
                     onChange={handleChange}
                   >
-                    {opts.map((item, i) => (
+                    {opts.map((item) => (
                       <Option key={item}>{item}</Option>
                     ))}
                   </Select>
@@ -90,11 +94,11 @@ export default function ColumnForm({
             ))}
             <Form.Item>
               <Button
-                type='dashed'
+                type="dashed"
                 onClick={() => add()}
                 block
                 icon={<PlusOutlined />}
-                id='add-button'
+                id="add-button"
               >
                 Add column
               </Button>
@@ -105,3 +109,12 @@ export default function ColumnForm({
     </Form>
   );
 }
+
+ColumnForm.propTypes = {
+  cols: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onFinish: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  formRef: PropTypes.func.isRequired,
+  form: PropTypes.shape({}).isRequired,
+  opts: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

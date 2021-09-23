@@ -1,6 +1,13 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-plusplus */
+/* eslint-disable react/no-this-in-sfc */
+/* eslint-disable no-extend-native */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect, useRef } from 'react';
 import XLSX from 'xlsx';
-import { Button, Modal, Form, Input } from 'antd';
+import {
+  Button, Modal, Form, Input,
+} from 'antd';
 import { DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
@@ -8,7 +15,7 @@ import OutTable from './Table';
 import Params from './Params';
 import codes from '../NCIcodes';
 
-export default function SheetJSApp(props) {
+export default function SheetJSApp() {
   const [data, setData] = useState([]);
   const [cols, setCols] = useState([]);
   const [sheets, setSheets] = useState([]);
@@ -22,27 +29,27 @@ export default function SheetJSApp(props) {
   const [form] = Form.useForm();
 
   String.prototype.capitalize = function () {
-    return this.toLowerCase().replace(/\b[a-z]/g, char => char.toUpperCase());
+    return this.toLowerCase().replace(/\b[a-z]/g, (char) => char.toUpperCase());
   };
 
   const cleanAddr = (datas, field) => {
     const addr = datas[0].indexOf(field);
     if (addr >= 0) {
       const cleaned = datas.map((item, i) => {
-        if (i == 0) return item;
+        if (i === 0) return item;
 
         item.splice(
           addr,
           1,
           item[addr]
             ? item[addr]
-                .capitalize()
-                .trim()
-                .replace(
-                  /UNKNOWN|Unknown|County|Sub County|Invalid code|[.,]+/g,
-                  ''
-                )
-            : ''
+              .capitalize()
+              .trim()
+              .replace(
+                /UNKNOWN|Unknown|County|Sub County|Invalid code|[.,]+/g,
+                '',
+              )
+            : '',
         );
         return item;
       });
@@ -52,12 +59,12 @@ export default function SheetJSApp(props) {
     return datas;
   };
 
-  const handleFile = async (file /*:File*/) => {
+  const handleFile = async (file /*: File */) => {
     /* Boilerplate to set up FileReader */
 
     const reader = new FileReader();
     const rABS = !!reader.readAsBinaryString;
-    reader.onload = async e => {
+    reader.onload = async (e) => {
       /* Parse data */
       const bstr = e.target.result;
       const wb = await XLSX.read(bstr, { type: rABS ? 'binary' : 'array' });
@@ -71,11 +78,11 @@ export default function SheetJSApp(props) {
       const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
       // Remove unwanted characters from address
       let cleaned = datas;
-      await ['ADDR (desc)', 'ADDR (cat)'].forEach(field => {
+      await ['ADDR (desc)', 'ADDR (cat)'].forEach((field) => {
         cleaned = cleanAddr(datas, field);
       });
 
-      await setCols(make_cols(ws['!ref']));
+      await setCols(makeCols(ws['!ref']));
       if (!cleaned[0].includes('OrgUnit')) {
         setOrgModal(true);
       }
@@ -91,15 +98,16 @@ export default function SheetJSApp(props) {
     /* Convert array of arrays */
     const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
     let cleaned = datas;
-    await [('ADDR (desc)', 'ADDR (cat)')].forEach(field => {
+    await [('ADDR (desc)', 'ADDR (cat)')].forEach((field) => {
       cleaned = cleanAddr(datas, field);
     });
 
-    setCols(make_cols(ws['!ref']));
+    setCols(makeCols(ws['!ref']));
+    return cleaned;
   };
 
   // Switch sheet
-  const changeSheet = value => {
+  const changeSheet = (value) => {
     const idx = sheets.indexOf(value);
     setActiveSheet(idx);
     loadData();
@@ -114,11 +122,10 @@ export default function SheetJSApp(props) {
     XLSX.writeFile(wb, `${unit || 'export'}.xlsx`);
   };
 
-  const make_cols = refstr => {
-    let o = [],
-      C = XLSX.utils.decode_range(refstr).e.c + 1;
-    for (var i = 0; i < C; ++i)
-      o[i] = { name: XLSX.utils.encode_col(i), key: i };
+  const makeCols = (refstr) => {
+    const o = [];
+    const C = XLSX.utils.decode_range(refstr).e.c + 1;
+    for (let i = 0; i < C; ++i) o[i] = { name: XLSX.utils.encode_col(i), key: i };
     return o;
   };
 
@@ -129,7 +136,7 @@ export default function SheetJSApp(props) {
   }, [orgModal]);
 
   // submit & update origanization unit
-  const onFinish = values => {
+  const onFinish = (values) => {
     const header = data[0];
     setUnit(values?.orgUnit);
     if (!header.includes('OrgUnit')) {
@@ -180,43 +187,42 @@ export default function SheetJSApp(props) {
   };
 
   // Organization unit modal
-  const orgModals = () =>
-    Modal.confirm({
-      title: 'Enter organization unit',
-      visible: { orgModal },
-      onOk: () => {
-        formRef.current.submit();
-      },
-      okText: 'Submit',
-      content: (
-        <Form
-          name='dynamic_form_nest_item'
-          onFinish={onFinish}
-          autoComplete='off'
-          ref={formRef}
-          form={form}
+  const orgModals = () => Modal.confirm({
+    title: 'Enter organization unit',
+    visible: { orgModal },
+    onOk: () => {
+      formRef.current.submit();
+    },
+    okText: 'Submit',
+    content: (
+      <Form
+        name="dynamic_form_nest_item"
+        onFinish={onFinish}
+        autoComplete="off"
+        ref={formRef}
+        form={form}
+      >
+        <Form.Item
+          label="Organization unit"
+          name="orgUnit"
+          rules={[
+            { required: true, message: 'Please enter organization unit!' },
+          ]}
         >
-          <Form.Item
-            label='Organization unit'
-            name='orgUnit'
-            rules={[
-              { required: true, message: 'Please enter organization unit!' },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        </Form>
-      ),
-    });
+          <Input />
+        </Form.Item>
+      </Form>
+    ),
+  });
 
   return (
     <DragDropFile handleFile={handleFile}>
-      <div className='doc-header'>
+      <div className="doc-header">
         <DataInput handleFile={handleFile} />
         {data && data.length > 0 && (
           <>
             <Button
-              type='link'
+              type="link"
               icon={<PlusSquareOutlined />}
               onClick={() => setVisible(true)}
             >
@@ -234,24 +240,24 @@ export default function SheetJSApp(props) {
         )}
         <Button
           disabled={!data.length}
-          className='btn-export'
+          className="btn-export"
           onClick={exportFile}
-          type='link'
+          type="link"
           icon={<DownloadOutlined />}
         >
           Export
         </Button>
       </div>
-      <div className='row'>
-        <div className='col-xs-12'>
+      <div className="row">
+        <div className="col-xs-12">
           <OutTable data={data} cols={cols} />
         </div>
-        <div className='sheets'>
-          {sheets &&
-            sheets.length > 1 &&
-            sheets.map(item => (
+        <div className="sheets">
+          {sheets
+            && sheets.length > 1
+            && sheets.map((item) => (
               <Button
-                type='button'
+                type="button"
                 onClick={() => changeSheet(item)}
                 key={item}
                 disabled={item === 'NCI codes.'}
