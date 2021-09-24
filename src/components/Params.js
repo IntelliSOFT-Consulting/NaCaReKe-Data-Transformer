@@ -10,9 +10,10 @@ import ColumnModal from './ColModal';
 import insertCol from '../helpers/transform';
 import addMatch from '../helpers/MatchNCI';
 import positions from '../data/positions';
+import codes from '../NCIcodes';
 
 const Params = ({
-  visible, setVisible, data, setData, codes,
+  visible, setVisible, data, setData,
 }) => {
   const [cols, setCols] = useState(data[0]);
   const [isParams, setIsParams] = useState(false);
@@ -111,7 +112,6 @@ Params.propTypes = {
   setVisible: PropTypes.func.isRequired,
   data: PropTypes.array.isRequired,
   setData: PropTypes.func.isRequired,
-  codes: PropTypes.array.isRequired,
 };
 
 export default Params;

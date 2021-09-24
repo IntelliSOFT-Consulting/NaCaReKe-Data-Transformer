@@ -13,7 +13,6 @@ import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
-import codes from '../NCIcodes';
 import { cleanAddr } from '../helpers/cleaners';
 
 export default function SheetJSApp() {
@@ -174,7 +173,6 @@ export default function SheetJSApp() {
               setVisible={setVisible}
               data={data}
               setData={setData}
-              codes={codes}
             />
           </>
         )}
