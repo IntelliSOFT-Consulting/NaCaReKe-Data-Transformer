@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-extend-native */
 /* eslint-disable func-names */
@@ -42,6 +43,12 @@ const slashedDate = (date) => {
   return `${year}-${formatedDate.join('-')}`;
 };
 
+const emptyBirthDate = (date, age) => {
+  if (date?.toString().length < 8) return '1970-01-01';
+  const year = age ? new Date().getFullYear() - Number(age) : '1970';
+  return `${year}-01-01`;
+};
+
 // Format date to YYYY-MM-DD
 const formatDates = (date, age = null) => {
   if (!date && !age) return '1970-01-01';
@@ -68,7 +75,10 @@ const cleanDate = (col, datas) => {
 
     const passAge = !row[idx] && col === 'BIRTHD' ? row[age] : null;
 
-    const date = row[idx]?.toString().length > 7 ? formatDates(row[idx], passAge) : '1970-01-01';
+    const date = (!row[idx] || row[idx]?.toString().length < 8) && col !== 'BIRTHD'
+      ? '1970-01-01' : col === 'BIRTHD'
+      && row[idx]?.toString().length < 8 ? emptyBirthDate(row[idx], passAge)
+        : formatDates(row[idx], passAge);
 
     row.splice(idx, 1, date);
 
