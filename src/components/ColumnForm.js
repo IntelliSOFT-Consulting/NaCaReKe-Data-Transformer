@@ -5,6 +5,7 @@ import {
   Form, Button, Space, Select,
 } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import positions from '../data/positions';
 
 const { Option } = Select;
 
@@ -14,8 +15,10 @@ export default function ColumnForm({
   handleChange,
   formRef,
   form,
-  opts,
 }) {
+  const opts = [
+    ...new Set([...positions.rights, ...positions.yes, ...positions.lefts]),
+  ];
   return (
     <Form
       name="dynamic_form_nest_item"
@@ -116,5 +119,4 @@ ColumnForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   formRef: PropTypes.func.isRequired,
   form: PropTypes.shape({}).isRequired,
-  opts: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

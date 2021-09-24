@@ -14,6 +14,7 @@ import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
 import codes from '../NCIcodes';
+import { cleanAddr } from '../helpers/cleaners';
 
 export default function SheetJSApp() {
   const [data, setData] = useState([]);
@@ -30,33 +31,6 @@ export default function SheetJSApp() {
 
   String.prototype.capitalize = function () {
     return this.toLowerCase().replace(/\b[a-z]/g, (char) => char.toUpperCase());
-  };
-
-  const cleanAddr = (datas, field) => {
-    const addr = datas[0].indexOf(field);
-    if (addr >= 0) {
-      const cleaned = datas.map((item, i) => {
-        if (i === 0) return item;
-
-        item.splice(
-          addr,
-          1,
-          item[addr]
-            ? item[addr]
-              .capitalize()
-              .trim()
-              .replace(
-                /UNKNOWN|Unknown|County|Sub County|Invalid code|[.,]+/g,
-                '',
-              )
-            : '',
-        );
-        return item;
-      });
-      setData(cleaned);
-      return cleaned;
-    }
-    return datas;
   };
 
   const handleFile = async (file /*: File */) => {
@@ -80,6 +54,7 @@ export default function SheetJSApp() {
       let cleaned = datas;
       await ['ADDR (desc)', 'ADDR (cat)'].forEach((field) => {
         cleaned = cleanAddr(datas, field);
+        setData(cleaned);
       });
 
       await setCols(makeCols(ws['!ref']));
@@ -100,6 +75,7 @@ export default function SheetJSApp() {
     let cleaned = datas;
     await [('ADDR (desc)', 'ADDR (cat)')].forEach((field) => {
       cleaned = cleanAddr(datas, field);
+      setData(cleaned);
     });
 
     setCols(makeCols(ws['!ref']));
@@ -154,37 +130,6 @@ export default function SheetJSApp() {
   };
 
   // column positions to be placed righ or left & check for yes responses
-  const positions = {
-    lefts: [
-      'CHEMOTREAT (true)',
-      'IMMUNOTREAT (true)',
-      'HORMONETREATMENT (true)',
-      'RADIOTREAT (true)',
-      'SURGERY (true)',
-      'HIV(true)',
-      'SPECIFICALLYPOSITIVE (true)',
-      'OTHERTREATMENT(TRUE)',
-      'BAS (true)',
-      'TELEPHONENO(+254)',
-      'OTHERCONCURRENTILLNESS(true)',
-    ],
-    rights: [
-      'MOR(Matching NCI Codes)',
-      'TOP(Matching NCI Codes)',
-      'ADDR (Sub County)',
-      'WARD',
-      'NOKNUMBER',
-      'NOKNAME',
-      'ADDR (County)',
-    ],
-    yes: [
-      'CHEMOTREAT (true)',
-      'IMMUNOTREAT (true)',
-      'HORMONETREATMENT (true)',
-      'RADIOTREAT (true)',
-      'SURGERY (true)',
-    ],
-  };
 
   // Organization unit modal
   const orgModals = () => Modal.confirm({
@@ -233,7 +178,6 @@ export default function SheetJSApp() {
               setVisible={setVisible}
               data={data}
               setData={setData}
-              positions={positions}
               codes={codes}
             />
           </>

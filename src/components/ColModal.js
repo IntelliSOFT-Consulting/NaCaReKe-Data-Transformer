@@ -5,7 +5,6 @@ import { Modal } from 'antd';
 import ColumnForm from './ColumnForm';
 
 export default function ColModal({
-  opts,
   handleChange,
   onFinish,
   visible,
@@ -27,7 +26,6 @@ export default function ColModal({
         form={form}
         formRef={formRef}
         onFinish={onFinish}
-        opts={opts}
         handleChange={handleChange}
         cols={cols}
       />
@@ -36,7 +34,6 @@ export default function ColModal({
 }
 
 ColModal.propTypes = {
-  opts: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   onFinish: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,

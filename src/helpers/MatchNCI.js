@@ -42,7 +42,6 @@ const addMatch = (title, col, datas, codes) => {
     return row;
   });
   return final;
-  //   setData(final);
 };
 
 export default addMatch;

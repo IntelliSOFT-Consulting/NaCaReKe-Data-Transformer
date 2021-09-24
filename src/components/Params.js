@@ -9,9 +9,10 @@ import { FileSyncOutlined } from '@ant-design/icons';
 import ColumnModal from './ColModal';
 import insertCol from '../helpers/transform';
 import addMatch from '../helpers/MatchNCI';
+import positions from '../data/positions';
 
 const Params = ({
-  visible, setVisible, data, setData, positions, codes,
+  visible, setVisible, data, setData, codes,
 }) => {
   const [cols, setCols] = useState(data[0]);
   const [isParams, setIsParams] = useState(false);
@@ -87,10 +88,6 @@ const Params = ({
     if (data && data.length > 1) setCols(data[0]);
   }, [data]);
 
-  const opts = [
-    ...new Set([...positions.rights, ...positions.yes, ...positions.lefts]),
-  ];
-
   return (
     <>
       {isParams && (
@@ -99,7 +96,6 @@ const Params = ({
         </Button>
       )}
       <ColumnModal
-        opts={opts}
         handleChange={handleChange}
         visible={visible}
         setVisible={setVisible}
@@ -115,7 +111,6 @@ Params.propTypes = {
   setVisible: PropTypes.func.isRequired,
   data: PropTypes.array.isRequired,
   setData: PropTypes.func.isRequired,
-  positions: PropTypes.object.isRequired,
   codes: PropTypes.array.isRequired,
 };
 
