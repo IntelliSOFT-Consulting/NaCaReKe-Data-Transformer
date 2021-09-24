@@ -5,9 +5,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect, useRef } from 'react';
 import XLSX from 'xlsx';
-import {
-  Button, Modal, Form, Input,
-} from 'antd';
+import { Button, Modal, Form, Input } from 'antd';
 import { DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import DragDropFile from './DragDrop';
 import DataInput from './DataInput';

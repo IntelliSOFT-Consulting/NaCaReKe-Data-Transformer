@@ -3,7 +3,7 @@ const isInvalid = (input) => input
 
 const replaceAddr = (addr, txt = '') => `${addr
   .toString()
-  .replace(/UNKNOWN|Unknown|County| Sub County|Invalid code|[.,]+/g, '')
+  .replace(/UNKNOWN|Unknown|County|Sub County|Invalid code|[.,]+/g, '')
   .trim()} ${txt}`;
 
 // Insert columns and update the data accordingly

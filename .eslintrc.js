@@ -16,5 +16,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': 'off',
     'react/no-array-index-key': 'off',
+    'object-curly-newline': 'off',
   },
 };
