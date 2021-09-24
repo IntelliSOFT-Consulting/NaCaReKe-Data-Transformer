@@ -1,5 +1,5 @@
 import React from 'react';
-import Sheet from './components/Index';
+import Sheet from './components/index';
 
 export default function App() {
   return <Sheet />;
