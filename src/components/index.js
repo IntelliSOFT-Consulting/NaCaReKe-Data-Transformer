@@ -29,10 +29,6 @@ export default function SheetJSApp() {
   const formRef = useRef(null);
   const [form] = Form.useForm();
 
-  String.prototype.capitalize = function () {
-    return this.toLowerCase().replace(/\b[a-z]/g, (char) => char.toUpperCase());
-  };
-
   const handleFile = async (file /*: File */) => {
     /* Boilerplate to set up FileReader */
 

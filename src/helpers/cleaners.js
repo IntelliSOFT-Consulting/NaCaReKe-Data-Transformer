@@ -1,9 +1,10 @@
 export const capitalize = (str) => str.toLowerCase().replace(/\b[a-z]/g, (char) => char.toUpperCase());
 
 export const cleanAddrChars = (str) => {
+  const properStr = capitalize(str);
   const checks = `${['Unknown', 'County', 'Sub County', 'Invalid Code', 'Invalid Category'].map((item) => `${item}|${item.toLowerCase()}|${item.toUpperCase()}`).join('|')}|[.,']`;
   const reg = new RegExp(`(${checks})`, 'gi');
-  return str.replace(reg, '');
+  return properStr.replace(reg, '');
 };
 
 export const cleanAddr = (datas, field) => {
@@ -17,7 +18,6 @@ export const cleanAddr = (datas, field) => {
         1,
         item[addr]
           ? cleanAddrChars(item[addr]
-            .capitalize()
             .trim())
           : '',
       );
