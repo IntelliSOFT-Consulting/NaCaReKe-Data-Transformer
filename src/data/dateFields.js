@@ -1,0 +1,20 @@
+const dateFields = [
+  'INCID',
+  'REPORTINGDATE',
+  'BIRTHD',
+  'DLC',
+  'PATIENTUPDATEDATE',
+  'SURGERYDATE',
+  'SURDATE',
+  'CHEMOTREATMENTDATE',
+  'CHEMODATE',
+  'IMMUNOTREATMENTDATE',
+  'IMMDATE',
+  'HORMDATE',
+  'RADIOTREATMENTDATE',
+  'RADDATE',
+  'OTHERDATE',
+  'UPDATE',
+];
+
+export default dateFields;

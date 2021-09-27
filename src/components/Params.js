@@ -11,6 +11,8 @@ import insertCol from '../helpers/transform';
 import addMatch from '../helpers/MatchNCI';
 import positions from '../data/positions';
 import codes from '../NCIcodes';
+import dateFields from '../data/dateFields';
+import cleanDate from '../helpers/dates';
 
 const Params = ({
   visible, setVisible, data, setData,
@@ -25,6 +27,12 @@ const Params = ({
       setIsParams(true);
     }
   }, [data.length]);
+
+  const formatTime = (datas) => {
+    dateFields.forEach((field) => {
+      setData(cleanDate(field, datas));
+    });
+  };
 
   const handleMatchNCI = (datas = []) => {
     const headers = datas[0];
@@ -44,6 +52,7 @@ const Params = ({
   const onFinish = async (values) => {
     await localStorage.setItem('params', JSON.stringify(values.params));
     await handleMatchNCI(data);
+    await formatTime(data);
     await values.params.forEach((param) => {
       const transformed = insertCol(
         param.check,
@@ -64,6 +73,7 @@ const Params = ({
   const autoProcess = async () => {
     const params = JSON.parse(localStorage.getItem('params'));
     await handleMatchNCI(data);
+    await formatTime(data);
     if (params) {
       await params.forEach((param) => {
         insertCol(
