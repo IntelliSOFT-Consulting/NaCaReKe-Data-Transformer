@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ForwardRef(InternalForm)
+  autoComplete="off"
+  className="col-form"
+  form={Object {}}
+  name="dynamic_form_nest_item"
+  onFinish={[Function]}
+>
+  <FormList
+    name="params"
+  >
+    <Component />
+  </FormList>
+</ForwardRef(InternalForm)>
+`;

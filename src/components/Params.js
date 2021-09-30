@@ -112,6 +112,7 @@ const Params = ({
         setVisible={setVisible}
         cols={cols}
         onFinish={onFinish}
+        form={form}
       />
     </>
   );

@@ -117,6 +117,6 @@ ColumnForm.propTypes = {
   cols: PropTypes.arrayOf(PropTypes.string).isRequired,
   onFinish: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  formRef: PropTypes.func.isRequired,
+  formRef: PropTypes.object.isRequired,
   form: PropTypes.shape({}).isRequired,
 };
