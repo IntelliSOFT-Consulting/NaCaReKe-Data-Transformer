@@ -5,13 +5,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect, useRef } from 'react';
 import XLSX from 'xlsx';
-import { Button, Modal, Form, Input } from 'antd';
+import { Button, Modal, Form, Input, Tabs } from 'antd';
 import { DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
 import { cleanAddr } from '../helpers/cleaners';
+import Errors from './Errors';
+
+const { TabPane } = Tabs;
 
 export default function SheetJSApp() {
   const [data, setData] = useState([]);
@@ -22,6 +25,7 @@ export default function SheetJSApp() {
   const [visible, setVisible] = useState(false);
   const [orgModal, setOrgModal] = useState(false);
   const [unit, setUnit] = useState(null);
+  const [errors, setErrors] = useState([]);
 
   const formRef = useRef(null);
   const [form] = Form.useForm();
@@ -82,13 +86,13 @@ export default function SheetJSApp() {
     loadData();
   };
 
-  const exportFile = () => {
+  const exportFile = (datas, format = 'xlsx') => {
     /* convert state to workbook */
-    const ws = XLSX.utils.aoa_to_sheet(data);
+    const ws = XLSX.utils.aoa_to_sheet(datas);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'SheetJS');
     /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, `${unit || 'export'}.xlsx`);
+    XLSX.writeFile(wb, `${unit || 'export'} errors.${format}`);
   };
 
   const makeCols = (refstr) => {
@@ -171,25 +175,29 @@ export default function SheetJSApp() {
               setVisible={setVisible}
               data={data}
               setData={setData}
+              setErrors={setErrors}
+              errors={errors}
             />
           </>
         )}
         <Button
           disabled={!data.length}
           className="btn-export"
-          onClick={exportFile}
+          onClick={() => exportFile(data)}
           type="link"
           icon={<DownloadOutlined />}
         >
           Export
         </Button>
       </div>
-      <div className="row">
-        <div className="col-xs-12">
-          <OutTable data={data} cols={cols} />
-        </div>
-        <div className="sheets">
-          {sheets
+      <Tabs type="card">
+        <TabPane tab="Data" key="1">
+          <div className="row">
+            <div className="col-xs-12">
+              <OutTable data={data} cols={cols} />
+            </div>
+            <div className="sheets">
+              {sheets
             && sheets.length > 1
             && sheets.map((item) => (
               <Button
@@ -201,8 +209,15 @@ export default function SheetJSApp() {
                 {item}
               </Button>
             ))}
-        </div>
-      </div>
+            </div>
+          </div>
+        </TabPane>
+        <TabPane tab="Errors" key="2">
+          <Errors errors={errors} exportFile={exportFile} />
+        </TabPane>
+
+      </Tabs>
+
     </DragDropFile>
   );
 }

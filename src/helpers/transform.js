@@ -1,3 +1,5 @@
+import subCounties from '../data/scounties';
+
 const isInvalid = (input) => input
   && !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(input);
 
@@ -6,9 +8,12 @@ const replaceAddr = (addr, txt = '') => `${addr
   .replace(/UNKNOWN|Unknown|County|Sub County|Invalid code|[.,]+/g, '')
   .trim()} ${txt}`;
 
+const err = [];
+
 // Insert columns and update the data accordingly
-const insertCol = (title, col, right = false, yes = null, data) => {
+const insertCol = (title, col, right = false, yes = null, data, error = {}) => {
   const headers = data[0];
+  const { setErrors, errors } = error;
   if (!headers.includes(col)) {
     const checked = headers.indexOf(title);
 
@@ -74,10 +79,16 @@ const insertCol = (title, col, right = false, yes = null, data) => {
           isInvalid(row[checked]) ? replaceAddr(row[checked], 'County') : '',
         );
       } else if (col.includes('ADDR (Sub County)')) {
+        const sc = isInvalid(row[checked]) ? replaceAddr(row[checked], 'Sub County') : '';
+
+        if (sc && !subCounties.includes(sc)) {
+          err.push(sc);
+        }
+
         row.splice(
           checked + 1,
           0,
-          isInvalid(row[checked]) ? replaceAddr(row[checked], 'Sub County') : '',
+          sc,
         );
       } else if (col.includes('WARD')) {
         row.splice(
@@ -90,10 +101,10 @@ const insertCol = (title, col, right = false, yes = null, data) => {
           right ? checked + 1 : checked,
           0,
           right
-            ? !!(
+            ? !(
               row[checked] && row[checked].toString().toLowerCase() === 'yes'
             )
-            : !!(
+            : !(
               row[checked] && row[checked].toString().toLowerCase() === 'yes'
             ),
         );
@@ -107,6 +118,7 @@ const insertCol = (title, col, right = false, yes = null, data) => {
 
       return row;
     });
+    setErrors([...errors, { key: 'subCounty', subCounty: [...new Set(err)] }]);
     return filledCols;
   }
   return false;

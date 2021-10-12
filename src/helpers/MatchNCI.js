@@ -1,7 +1,9 @@
 import didYouMean from 'didyoumean';
 
 // Match morphology & topology codes
-const addMatch = (title, col, datas, codes) => {
+const addMatch = (title, col, datas, codes, error = {}) => {
+  const err = [];
+  const { setErrors, errors } = error;
   const headers = datas[0];
   const nci = codes.filter((item, i) => i > 1);
   const checkMor = title.includes('MOR')
@@ -21,26 +23,36 @@ const addMatch = (title, col, datas, codes) => {
       const finder = row[idx + 1]
         ? didYouMean(row[idx + 1].toString(), nciMatch)
         : '';
+      const code = finder && checkMor[nciMatch.indexOf(row[idx + 1])]
+        ? checkMor[nciMatch.indexOf(row[idx + 1])][1] : '';
+      if (!code && row[idx + 1]) {
+        err.push(row[idx + 1]);
+      }
       row.splice(
         idx + 1,
         0,
-        finder && checkMor[nciMatch.indexOf(row[idx + 1])]
-          ? checkMor[nciMatch.indexOf(row[idx + 1])][1]
-          : '',
+        code,
       );
     } else {
       const nciMatchTop = checkMor.map((item) => (item[1] ? item[1].replace(/[C.]+/g, '') : ''));
+      const code = row[idx] && nciMatchTop.includes(row[idx].toString())
+        ? checkMor[nciMatchTop.indexOf(row[idx].toString())][1]
+        : '';
 
+      if (!code && row[idx]) {
+        err.push({ top: row[idx + 1] });
+      }
       row.splice(
         idx + 1,
         0,
-        row[idx] && nciMatchTop.includes(row[idx].toString())
-          ? checkMor[nciMatchTop.indexOf(row[idx].toString())][1]
-          : '',
+        code,
       );
     }
     return row;
   });
+  const isTop = err.length && err[0]?.top;
+  console.log(err);
+  setErrors([...errors, isTop ? { key: isTop ? 'top' : 'mor', top: [...new Set(Object.values(err))] } : { key: isTop ? 'top' : 'mor', mor: [...new Set(err)] }]);
   return final;
 };
 
