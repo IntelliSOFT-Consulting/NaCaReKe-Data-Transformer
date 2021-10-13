@@ -17,7 +17,7 @@ export default function Errors({ errors, setErrors, data, setData }) {
         tags?.map((tag) => {
           const alt = closestMatch(tag, subCounties);
           const handleCorrect = async (sc, replace) => {
-            const newData = await correctAddress(data, 'ADDR (Sub County)', sc, replace);
+            const newData = await correctAddress(data, sc, replace);
             await setData(newData);
             setErrors([{ ...errors[0], addr: errors[0].addr.filter((t) => t !== tag) }]);
           };
