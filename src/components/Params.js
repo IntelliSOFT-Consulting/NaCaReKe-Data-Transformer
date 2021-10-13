@@ -102,7 +102,6 @@ const Params = ({ visible, setVisible, data, setData, setErrors, errors }) => {
         if (check?.toLowerCase()?.includes('addr')) {
           const setAddr = await addresses(data, check);
           setData(setAddr.addr);
-          console.log(setAddr.err);
           err.addr = err.addr ? [...err.addr, ...new Set(setAddr.err)] : [...new Set(setAddr.err)];
         }
         if (

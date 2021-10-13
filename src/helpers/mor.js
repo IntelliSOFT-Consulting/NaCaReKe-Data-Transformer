@@ -1,4 +1,4 @@
-import didYouMean from 'didyoumean';
+import { closestMatch } from 'closest-match';
 import codes from '../data/NCIcodes';
 
 const morCodes = codes.map((item) => [item[0], item[1]]);
@@ -15,7 +15,7 @@ const mor = (data) => {
   if (idx >= 0) {
     const mapped = datas.map((item, i) => {
       if (i === 0) return item;
-      const matchedCode = item[idx] ? didYouMean(item[idx], nciMatchDesc) : '';
+      const matchedCode = item[idx] ? closestMatch(item[idx], nciMatchDesc) : '';
       if (matchedCode) {
         item.splice(idx + 1, 0, morCodes[nciMatchDesc.indexOf(matchedCode)][1]);
       }

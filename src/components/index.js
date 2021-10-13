@@ -92,13 +92,13 @@ export default function SheetJSApp() {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'SheetJS');
     /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, `${unit || 'export'} errors.${format}`);
+    XLSX.writeFile(wb, `${unit || 'export'} data.${format}`);
   };
 
   const makeCols = (refstr) => {
     const o = [];
     const C = XLSX.utils.decode_range(refstr).e.c + 1;
-    for (let i = 0; i < C; ++i) o[i] = { name: XLSX.utils.encode_col(i), key: i };
+    for (let i = 0; i < C; ++i) { o[i] = { name: XLSX.utils.encode_col(i), key: i }; }
     return o;
   };
 
@@ -198,26 +198,32 @@ export default function SheetJSApp() {
             </div>
             <div className="sheets">
               {sheets
-            && sheets.length > 1
-            && sheets.map((item) => (
-              <Button
-                type="button"
-                onClick={() => changeSheet(item)}
-                key={item}
-                disabled={item === 'NCI codes.'}
-              >
-                {item}
-              </Button>
-            ))}
+                && sheets.length > 1
+                && sheets.map((item) => (
+                  <Button
+                    type="button"
+                    onClick={() => changeSheet(item)}
+                    key={item}
+                    disabled={item === 'NCI codes.'}
+                  >
+                    {item}
+                  </Button>
+                ))}
             </div>
           </div>
         </TabPane>
         <TabPane tab="Errors" key="2">
-          <Errors errors={errors} exportFile={exportFile} />
+          <div>
+            <Errors
+              errors={errors}
+              exportFile={exportFile}
+              data={data}
+              setData={setData}
+              setErrors={setErrors}
+            />
+          </div>
         </TabPane>
-
       </Tabs>
-
     </DragDropFile>
   );
 }

@@ -51,16 +51,6 @@ thead th {
   font-weight: 600;
 }
 
-/* .col-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.err-container {
+  margin: auto 2rem !important;
 }
-
-.col-form > div {
-  width: 100%;
-}
-
-.col-form > div > div {
-  width: calc(100% / 2 - 1rem);
-} */

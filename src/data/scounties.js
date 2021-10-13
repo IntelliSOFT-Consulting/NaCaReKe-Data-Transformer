@@ -105,6 +105,7 @@ const subCounties = [
   'Kigumo Sub County',
   'Kiharu Sub County',
   'Kikuyu Sub County',
+  'Kilgoris Sub County',
   'Kilifi North Sub County',
   'Kilifi South Sub County',
   'Kilome Sub County',
