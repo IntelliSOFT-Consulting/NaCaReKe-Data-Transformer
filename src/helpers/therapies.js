@@ -18,7 +18,10 @@ const therapies = (data, col, coded = false, treat = false) => {
     if (col.toLowerCase().includes('imm')) {
       therapy = 'IMMUNOTREAT (true)';
     }
-    if (col.toLowerCase().includes('other')) {
+    if (col.toLowerCase().includes('othert')) {
+      therapy = 'OTHERTREATMENT(TRUE)';
+    }
+    if (col.toLowerCase().includes('otherc') || col.toLowerCase().includes('diseasec')) {
       therapy = 'OTHERCONCURRENTILLNESS(true)';
     }
     const idx = data[0].indexOf(col);

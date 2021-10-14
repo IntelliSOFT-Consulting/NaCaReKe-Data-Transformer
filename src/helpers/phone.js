@@ -1,3 +1,5 @@
+import { phoneCheck } from './cleaners';
+
 const cleanName = (name) => (!name ? '' : `+254${name.toString().replace(/[^0-9]/g, '')}`);
 
 const phone = (data, col) => {
@@ -10,7 +12,7 @@ const phone = (data, col) => {
       if (i === 0) {
         return item;
       }
-      return item.splice(idx + 1, 0, cleanName(item[idx]));
+      return item.splice(idx + 1, 0, cleanName(phoneCheck(item[idx])));
     });
     return num;
   }

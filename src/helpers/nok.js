@@ -1,3 +1,5 @@
+import { phoneCheck } from './cleaners';
+
 const isUnknown = (data) => !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(data);
 const cleanName = (name) => (!name || isUnknown(name)
   ? ''
@@ -18,8 +20,8 @@ const nok = (data, col) => {
       if (i === 0) {
         return item;
       }
-      item.splice(idx + 1, 0, cleanName(item[idx]));
-      item.splice(idx + 2, 0, cleanNumber(item[idx]));
+      item.splice(idx + 1, 0, cleanName(phoneCheck(item[idx])));
+      item.splice(idx + 2, 0, cleanNumber(phoneCheck(item[idx])));
       return item;
     });
     return name;

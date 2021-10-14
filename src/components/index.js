@@ -11,7 +11,7 @@ import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
-import { cleanAddr } from '../helpers/cleaners';
+import { dataCleaner } from '../helpers/cleaners';
 import Errors from './Errors';
 
 const { TabPane } = Tabs;
@@ -48,11 +48,9 @@ export default function SheetJSApp() {
       /* Convert array of arrays */
       const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
       // Remove unwanted characters from address
-      let cleaned = datas;
-      await ['ADDR (desc)', 'ADDR (cat)'].forEach((field) => {
-        cleaned = cleanAddr(datas, field);
-        setData(cleaned);
-      });
+      const cleaned = await dataCleaner(datas);
+
+      setData(cleaned);
 
       await setCols(makeCols(ws['!ref']));
       if (!cleaned[0].includes('OrgUnit')) {
@@ -69,11 +67,8 @@ export default function SheetJSApp() {
 
     /* Convert array of arrays */
     const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
-    let cleaned = datas;
-    await [('ADDR (desc)', 'ADDR (cat)')].forEach((field) => {
-      cleaned = cleanAddr(datas, field);
-      setData(cleaned);
-    });
+    const cleaned = await dataCleaner(datas);
+    setData(cleaned);
 
     setCols(makeCols(ws['!ref']));
     return cleaned;
