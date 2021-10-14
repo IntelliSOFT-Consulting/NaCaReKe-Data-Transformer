@@ -1,9 +1,15 @@
 /* eslint-disable no-undef */
-import { cleanAddr, cleanAddrChars, capitalize } from '../cleaners';
+import {
+  dataCleaner,
+  cleanAddrChars,
+  capitalize,
+  phoneCheck,
+  checkFields,
+} from '../cleaners';
 
-const testAddr = [['ADDR(desc)'], ['nairobi.']];
-const testCleanAddr = [['ADDR(desc)'], ['Kisumu']];
-const testWhiteSpace = [['ADDR(desc)'], ['Eldoret ']];
+const testAddr = [['ADDR (desc)'], ['nairobi.']];
+const testCleanAddr = [['ADDR (desc)'], ['Kisumu']];
+const testWhiteSpace = [['ADDR (desc)'], ['Eldoret ']];
 
 describe('Capitalize', () => {
   it('should capitalize every first letter of a string', () => {
@@ -20,20 +26,20 @@ describe('Capitalize', () => {
 });
 
 describe('Clean Addr', () => {
-  it('should capitalize & remove all non-alphanumeric characters', () => {
-    expect(cleanAddr(testAddr, 'ADDR(desc)')).toEqual([
-      ['ADDR(desc)'],
-      ['Nairobi'],
-    ]);
+  it('should capitalize & remove all non-alphanumeric characters', async () => {
+    const result = await dataCleaner(testAddr);
+    expect(result).toEqual([['ADDR (desc)'], ['Nairobi']]);
   });
 
-  it('should not change the string if it is already clean', () => {
-    expect(cleanAddr(testCleanAddr, 'ADDR(desc)')).toEqual(testCleanAddr);
+  it('should not change the string if it is already clean', async () => {
+    const result = await dataCleaner(testCleanAddr);
+    expect(result).toEqual(testCleanAddr);
   });
 
-  it('should remove whitespaces', () => {
-    expect(cleanAddr(testWhiteSpace, 'ADDR(desc)')).toEqual([
-      ['ADDR(desc)'],
+  it('should remove whitespaces', async () => {
+    const result = await dataCleaner(testWhiteSpace);
+    expect(result).toEqual([
+      ['ADDR (desc)'],
       ['Eldoret'],
     ]);
   });
@@ -63,4 +69,27 @@ describe('Clean Addr Chars', () => {
   it('should remove whitespaces', () => {
     expect(cleanAddrChars('Westlands. ')).toEqual('Westlands');
   });
+});
+
+describe('Phone Check', () => {
+  const phones = [
+    ['078556443', '078556443'],
+    ['none', ''],
+    ['NONE', ''],
+  ];
+  test.each(phones)('should format the phone number', (phone, expected) => {
+    expect(phoneCheck(phone)).toEqual(expected);
+  });
+});
+
+describe('Check Fields', () => {
+  const datas = [
+    ['INCID', 'ADDR (desc)'],
+    ['#N/A', 'Kisumu'],
+    ['Unknown', 'n/a'],
+    ['invalid code', 'Naivasha unknown'],
+    ['N/A', 'Westlands Sub County'],
+  ];
+  const output = 'INCID,ADDR (desc),,Kisumu,,,,Naivasha ,,Westlands';
+  expect(checkFields(datas)).toEqual(output);
 });

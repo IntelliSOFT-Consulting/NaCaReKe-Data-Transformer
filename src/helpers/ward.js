@@ -1,5 +1,5 @@
 const isInvalid = (input) => input
-  && !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(input);
+  && !/^UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(input);
 
 const replaceAddr = (addr, txt = '') => `${addr
   .toString()
@@ -20,7 +20,7 @@ const checkWard = (data, col) => {
       item.splice(idx + 1, 0, sc);
       return item;
     });
-    return { addr };
+    return { addr, err: [] };
   }
   return { addr: data, err: [] };
 };

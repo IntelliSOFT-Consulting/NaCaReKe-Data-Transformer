@@ -12,7 +12,8 @@ const phone = (data, col) => {
       if (i === 0) {
         return item;
       }
-      return item.splice(idx + 1, 0, cleanName(phoneCheck(item[idx])));
+      item.splice(idx + 1, 0, cleanName(phoneCheck(item[idx])));
+      return item;
     });
     return num;
   }

@@ -1,7 +1,7 @@
 import subCounties from '../data/scounties';
 
 const isInvalid = (input) => input
-  && !/UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(input);
+  && !/^UNKNOWN|Unknown|NONE|N\/A|Invalid code|Invalid category.+/g.test(input);
 
 const replaceAddr = (addr, txt = '') => `${addr
   .toString()

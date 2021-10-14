@@ -1,6 +1,6 @@
 import { phoneCheck } from './cleaners';
 
-const isUnknown = (data) => !/UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(data);
+const isUnknown = (data) => /^UNKNOWN|Unknown|NONE|N\/A|Invalid code+/g.test(data);
 const cleanName = (name) => (!name || isUnknown(name)
   ? ''
   : name
