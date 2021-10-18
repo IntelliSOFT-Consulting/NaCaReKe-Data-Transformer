@@ -17,5 +17,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'react/no-array-index-key': 'off',
     'object-curly-newline': 'off',
+    'react/forbid-prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };

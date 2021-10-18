@@ -8,11 +8,11 @@ export default function ColModal({
   handleChange,
   onFinish,
   visible,
-  form,
   cols,
   setVisible,
+  form,
 }) {
-  const formRef = useRef();
+  const formRef = useRef(null);
   return (
     <Modal
       title="Edit data"
@@ -23,11 +23,11 @@ export default function ColModal({
       okText="Submit"
     >
       <ColumnForm
-        form={form}
         formRef={formRef}
         onFinish={onFinish}
         handleChange={handleChange}
         cols={cols}
+        form={form}
       />
     </Modal>
   );
@@ -37,7 +37,7 @@ ColModal.propTypes = {
   handleChange: PropTypes.func.isRequired,
   onFinish: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
-  form: PropTypes.object.isRequired,
   cols: PropTypes.array.isRequired,
   setVisible: PropTypes.func.isRequired,
+  form: PropTypes.object.isRequired,
 };

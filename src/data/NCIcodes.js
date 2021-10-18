@@ -1,6 +1,4 @@
 const codes = [
-  [null, 'Morphology', null, 'Topography'],
-  ['Description', 'ICD-O-3 Code', 'Description', 'ICD-O-3 Code'],
   ['Neoplasm, benign', 'M8000/0', 'External lip upper', 'C00.0'],
   [
     'Neoplasm, uncertain whether benign or malignant',

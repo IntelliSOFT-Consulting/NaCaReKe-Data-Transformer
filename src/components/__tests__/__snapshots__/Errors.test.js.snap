@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <Table
+    columns={
+      Array [
+        Object {
+          "dataIndex": "addr",
+          "key": "addr",
+          "render": [Function],
+          "title": "Sub Counties",
+        },
+        Object {
+          "dataIndex": "top",
+          "key": "top",
+          "render": [Function],
+          "title": "TOP",
+        },
+        Object {
+          "dataIndex": "mor",
+          "key": "mor",
+          "render": [Function],
+          "title": "MOR",
+        },
+      ]
+    }
+    dataSource={Array []}
+    rowKey="key"
+  />
+</div>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<Upload
+  accept=".xlsx,.xlsb,.xlsm,.xls,.xml,.csv,.txt,.ods,.fods,.uos,.sylk,.dif,.dbf,.prn,.qpw,.123,.wb*,.wq*,.html,.htm,.json"
+  action=""
+  className=""
+  data={Object {}}
+  data-testid="file-upload"
+  disabled={false}
+  listType="text"
+  multiple={false}
+  onChange={[Function]}
+  showUploadList={false}
+  supportServerRender={true}
+  type="select"
+>
+  <Button
+    data-testid="upload-btn"
+    icon={<ForwardRef(UploadOutlined) />}
+  >
+    Click to Upload
+  </Button>
+</Upload>
+`;

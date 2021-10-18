@@ -114,9 +114,9 @@ export default function ColumnForm({
 }
 
 ColumnForm.propTypes = {
-  cols: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cols: PropTypes.array.isRequired,
   onFinish: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  formRef: PropTypes.func.isRequired,
+  formRef: PropTypes.object.isRequired,
   form: PropTypes.shape({}).isRequired,
 };

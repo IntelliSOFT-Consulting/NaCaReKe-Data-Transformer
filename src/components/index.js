@@ -5,13 +5,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect, useRef } from 'react';
 import XLSX from 'xlsx';
-import { Button, Modal, Form, Input } from 'antd';
+import { Button, Modal, Form, Input, Tabs } from 'antd';
 import { DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import DragDropFile from './DragDrop';
 import DataInput from './DataInput';
 import OutTable from './Table';
 import Params from './Params';
-import { cleanAddr } from '../helpers/cleaners';
+import { dataCleaner } from '../helpers/cleaners';
+import Errors from './Errors';
+
+const { TabPane } = Tabs;
 
 export default function SheetJSApp() {
   const [data, setData] = useState([]);
@@ -22,6 +25,7 @@ export default function SheetJSApp() {
   const [visible, setVisible] = useState(false);
   const [orgModal, setOrgModal] = useState(false);
   const [unit, setUnit] = useState(null);
+  const [errors, setErrors] = useState([]);
 
   const formRef = useRef(null);
   const [form] = Form.useForm();
@@ -44,11 +48,9 @@ export default function SheetJSApp() {
       /* Convert array of arrays */
       const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
       // Remove unwanted characters from address
-      let cleaned = datas;
-      await ['ADDR (desc)', 'ADDR (cat)'].forEach((field) => {
-        cleaned = cleanAddr(datas, field);
-        setData(cleaned);
-      });
+      const cleaned = await dataCleaner(datas);
+
+      setData(cleaned);
 
       await setCols(makeCols(ws['!ref']));
       if (!cleaned[0].includes('OrgUnit')) {
@@ -65,11 +67,8 @@ export default function SheetJSApp() {
 
     /* Convert array of arrays */
     const datas = XLSX.utils.sheet_to_json(ws, { header: 1 });
-    let cleaned = datas;
-    await [('ADDR (desc)', 'ADDR (cat)')].forEach((field) => {
-      cleaned = cleanAddr(datas, field);
-      setData(cleaned);
-    });
+    const cleaned = await dataCleaner(datas);
+    setData(cleaned);
 
     setCols(makeCols(ws['!ref']));
     return cleaned;
@@ -82,19 +81,19 @@ export default function SheetJSApp() {
     loadData();
   };
 
-  const exportFile = () => {
+  const exportFile = (datas, format = 'xlsx') => {
     /* convert state to workbook */
-    const ws = XLSX.utils.aoa_to_sheet(data);
+    const ws = XLSX.utils.aoa_to_sheet(datas);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'SheetJS');
     /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, `${unit || 'export'}.xlsx`);
+    XLSX.writeFile(wb, `${unit || 'export'} data.${format}`);
   };
 
   const makeCols = (refstr) => {
     const o = [];
     const C = XLSX.utils.decode_range(refstr).e.c + 1;
-    for (let i = 0; i < C; ++i) o[i] = { name: XLSX.utils.encode_col(i), key: i };
+    for (let i = 0; i < C; ++i) { o[i] = { name: XLSX.utils.encode_col(i), key: i }; }
     return o;
   };
 
@@ -171,38 +170,55 @@ export default function SheetJSApp() {
               setVisible={setVisible}
               data={data}
               setData={setData}
+              setErrors={setErrors}
+              errors={errors}
             />
           </>
         )}
         <Button
           disabled={!data.length}
           className="btn-export"
-          onClick={exportFile}
+          onClick={() => exportFile(data)}
           type="link"
           icon={<DownloadOutlined />}
         >
           Export
         </Button>
       </div>
-      <div className="row">
-        <div className="col-xs-12">
-          <OutTable data={data} cols={cols} />
-        </div>
-        <div className="sheets">
-          {sheets
-            && sheets.length > 1
-            && sheets.map((item) => (
-              <Button
-                type="button"
-                onClick={() => changeSheet(item)}
-                key={item}
-                disabled={item === 'NCI codes.'}
-              >
-                {item}
-              </Button>
-            ))}
-        </div>
-      </div>
+      <Tabs type="card">
+        <TabPane tab="Data" key="1">
+          <div className="row">
+            <div className="col-xs-12">
+              <OutTable data={data} cols={cols} />
+            </div>
+            <div className="sheets">
+              {sheets
+                && sheets.length > 1
+                && sheets.map((item) => (
+                  <Button
+                    type="button"
+                    onClick={() => changeSheet(item)}
+                    key={item}
+                    disabled={item === 'NCI codes.'}
+                  >
+                    {item}
+                  </Button>
+                ))}
+            </div>
+          </div>
+        </TabPane>
+        <TabPane tab="Errors" key="2">
+          <div>
+            <Errors
+              errors={errors}
+              exportFile={exportFile}
+              data={data}
+              setData={setData}
+              setErrors={setErrors}
+            />
+          </div>
+        </TabPane>
+      </Tabs>
     </DragDropFile>
   );
 }

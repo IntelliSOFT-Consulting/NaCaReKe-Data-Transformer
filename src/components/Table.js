@@ -41,6 +41,6 @@ export default function DataTable({ data, cols }) {
 }
 
 DataTable.propTypes = {
-  data: propTypes.arrayOf(propTypes.object).isRequired,
+  data: propTypes.arrayOf(propTypes.array).isRequired,
   cols: propTypes.arrayOf(propTypes.object).isRequired,
 };

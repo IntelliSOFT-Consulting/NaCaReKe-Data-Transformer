@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Modal
+  confirmLoading={false}
+  okText="Submit"
+  okType="primary"
+  onCancel={[Function]}
+  onOk={[Function]}
+  title="Edit data"
+  visible={true}
+  width={1000}
+>
+  <ColumnForm
+    cols={
+      Array [
+        "RECS",
+        "RECS (desc)",
+        "CHEC",
+        "CHEC (desc)",
+        "AGE",
+        "ADDR",
+        "ADDR (cat)",
+        "ADDR (desc)",
+        "INCID",
+        "TOP",
+        "TOP (cat)",
+        "TOP (desc)",
+        "LTERALITY",
+        "LTERALITY (desc)",
+        "MOR",
+        "MOR (desc)",
+        "BEH",
+        "BEH (desc)",
+        "BAS",
+        "BAS (desc)",
+        "MPCODE",
+        "MPSEQ",
+        "MPTOT",
+        "I10",
+        "UPDATE",
+        "ICCC",
+        "OBSOLETEFLAGTUMOURTABLE",
+        "TUMOURID",
+        "PATIENTIDTUMOURTABLE",
+        "PATIENTRECORDIDTUMOURTABLE",
+        "TUMOURUPDATEDBY",
+        "TUMOURUNDUPLICATIONSTATUS",
+        "LABNUMBER",
+        "LABREPORTAVAILABLEPTFILE",
+        "LABREPORTAVAILABLEPTFILE (desc)",
+        "CD4COUNT",
+        "STATUSINDICATEDONCLINICALNOTES",
+        "STATUSINDICATEDONCLINICALNOTES (desc)",
+        "SPECIFICALLYNEGATIVE",
+        "SPECIFICALLYNEGATIVE (desc)",
+        "SPECIFICALLYPOSITIVE",
+        "SPECIFICALLYPOSITIVE (desc)",
+        "OTHERCONCURRENTILLNESS",
+        "OTHERADDRESS",
+        "GRADE",
+        "GRADE (desc)",
+        "STAGE",
+        "STAGE (desc)",
+        "REGNO",
+        "PERS",
+        "PERS (desc)",
+        "FIRSTN",
+        "MIDDLNAME",
+        "FAMN",
+        "SEX",
+        "SEX (desc)",
+        "BIRTHD",
+        "TRIB",
+        "TRIB (desc)",
+        "OCCU",
+        "OCCU (desc)",
+        "DLC",
+        "STAT",
+        "STAT (desc)",
+        "MIDN",
+        "OBSOLETEFLAGPATIENTTABLE",
+        "PATIENTRECORDID",
+        "PATIENTUPDATEDBY",
+        "PATIENTUPDATEDATE",
+        "PATIENTRECORDSTATUS",
+        "PATIENTCHECKSTATUS",
+        "SURTCT",
+        "SURTCT (desc)",
+        "SURGERYDATE",
+        "CHEMOTREAT",
+        "CHEMOTREAT (desc)",
+        "CHEMOTREATMENTDATE",
+        "IMMUNOTREAT",
+        "IMMUNOTREAT (desc)",
+        "IMMUNOTREATMENTDATE",
+        "HORMONETREATMENT",
+        "HORMONETREATMENT (desc)",
+        "HORMONETHERAPY",
+        "RADIOTREAT",
+        "RADIOTREAT (desc)",
+        "RADIOTREATMENTDATE",
+        "OTHERTREATMENT",
+        "OTHERDATE",
+        "HOSPITALNUMBER",
+        "DEATHCAUSE",
+        "REMARKSIFANY",
+        "IDENTIFICATIONNO",
+        "MARITALSTATUS",
+        "MARITALSTATUS (desc)",
+        "TELEPHONENO",
+        "TELEPHONENUMBERNOK",
+        "RELIGION",
+        "RELIGION (desc)",
+        "EDUCATIONLEVEL",
+        "EDUCATIONLEVEL (desc)",
+        "SMOKINGSTATUS",
+        "SMOKINGSTATUS (desc)",
+        "DRINKINGSTATUS",
+        "DRINKINGSTATUS (desc)",
+      ]
+    }
+    form={Object {}}
+    formRef={
+      Object {
+        "current": null,
+      }
+    }
+    handleChange={[Function]}
+    onFinish={[Function]}
+  />
+</Modal>
+`;
